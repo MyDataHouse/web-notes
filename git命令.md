@@ -29,6 +29,8 @@ git commit -m '描述信息'
 
 ```shell
 git checkout -- 文件名
+#新方法
+git restore 文件名
 ```
 
 ## 6.一次性添加多个文件到暂存区
@@ -101,7 +103,7 @@ git remote add origin 你的仓库链接
 ## 13.将本地代码推送到云仓库
 
 ```shell
-git push -u origin "master"
+git push -u origin "master"or
 ```
 
 ## 14.移除链接
@@ -144,12 +146,18 @@ git branch 分支名字
 
 ```shell
 git checkout 分支名字
+#创建切换分支
+git checkout -b 分支名字
+#新的方法,建议使用这个
+git switch 分支名字
 ```
 
 ## 21.快速创建并切换分支
 
 ```shell
 git checkout -b 分支名字
+#新的方法,建议使用这个
+git switch -c分支名字
 ```
 
 ## 22.合并分支
@@ -167,6 +175,8 @@ git branch -d  分支的名字  #需要是合并过的才能删除
 ## 24.将本地分支推送到远程仓库
 
 ```shell
+#把本地分支推送到远程分支,并进行关联
+git push --set-upstream origin master:master
 # -u 表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带 -u 参数
 git push -u 远程仓库的别名 本地分支名称:远程分支名称
 
@@ -202,9 +212,9 @@ git checkout -b login origin/loginer
 ## 27.拉取远程代码到本地
 
 ```shell
-git pull
+git pull origin 远程分支名:本地分支名
 
-git pull origin 分支名字
+git pull origin 远程分支名字
 ```
 
 ## 28.删除远程仓库
@@ -212,13 +222,100 @@ git pull origin 分支名字
 ```shell
 # 删除远程仓库中，制定名称的远程分支
 git push 远程仓库名称 --delete 远程分支名称
-
 # 示例
 git push origin --delete login
+#把指定本地分支的 commit 推到指定的远程主机远程分支上
+git push <远程主机名> <本地分支名>:<远程分支名>
+#把本地分支推送与之存在"追踪关系"的远程分支（通常两者同名），如果该远程分支不存在，则会被新建。
+git push <远程主机名> <远程分支名> 
+#删除指定的远程分支，等同于推送一个空的本地分支到远程分支
+git push <远程主机名>:<远程分支名>
+#指定默认主机，下次直接 git push 即可
+git push -u <远程主机名> <本地分支名>
 ```
 
 ## 29.强制删除
 
 ```shell
 git branch -D 分支名字
+```
+
+## 30.合并远程分支
+
+1.创建本地分支
+
+```shell
+#查看当前远程的版本
+$ git remote -v 
+#获取最新代码到本地临时分支(本地当前分支为[branch]，获取的远端的分支为[origin/branch])
+$ git fetch origin master:master1  [示例1：在本地建立master1分支，并下载远端的origin/master分支到master1分支中]
+$ git fetch origin dev:dev1[示例1：在本地建立dev1分支，并下载远端的origin/dev分支到dev1分支中]
+#查看版本差异
+$ git diff master1 [示例1：查看本地master1分支与当前分支的版本差异]
+$ git diff dev1    [示例2：查看本地dev1分支与当前分支的版本差异]
+#合并最新分支到本地分支
+$ git merge master1    [示例1：合并本地分支master1到当前分支]
+$ git merge dev1   [示例2：合并本地分支dev1到当前分支]
+#删除本地临时分支
+$ git branch -D master1    [示例1：删除本地分支master1]
+$ git branch -D dev1 [示例1：删除本地分支dev1]
+```
+
+2.不用创建本地分支
+
+```shell
+#查询当前远程的版本
+$ git remote -v
+#获取最新代码到本地(本地当前分支为[branch]，获取的远端的分支为[origin/branch])
+$ git fetch origin master  [示例1：获取远端的origin/master分支]
+$ git fetch origin dev [示例2：获取远端的origin/dev分支]
+#查看版本差异
+$ git log -p master..origin/master [示例1：查看本地master与远端origin/master的版本差异]
+$ git log -p dev..origin/dev   [示例2：查看本地dev与远端origin/dev的版本差异]
+#合并最新代码到本地分支
+$ git merge origin/master  [示例1：合并远端分支origin/master到当前分支]
+$ git merge origin/dev [示例2：合并远端分支origin/dev到当前分支]
+```
+
+## 31.暂时保存工作区文件,防止被带到其他分支
+
+```shell
+#保存工作区文件开始下一个分支的工作
+git stash save "修改的信息"
+#查看保存的文件列表
+git stash list
+#回到保存的文件版本
+git stash apply stash@{0}
+#：删除所有缓存的 stash。
+git stash clear 
+```
+
+## 32.git代理设置
+
+```javascript
+//设置全局代理
+//http
+git config --global https.proxy http://127.0.0.1:1080
+//https
+git config --global https.proxy https://127.0.0.1:1080
+//使用socks5代理的 例如ss，ssr 1080是windows下ss的默认代理端口,mac下不同，或者有自定义的，根据自己的改
+git config --global http.proxy socks5://127.0.0.1:1080
+git config --global https.proxy socks5://127.0.0.1:1080
+
+//只对github.com使用代理，其他仓库不走代理
+git config --global http.https://github.com.proxy socks5://127.0.0.1:1080
+git config --global https.https://github.com.proxy socks5://127.0.0.1:1080
+//取消github代理
+git config --global --unset http.https://github.com.proxy
+git config --global --unset https.https://github.com.proxy
+
+//取消全局代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+SSH协议
+
+```javascript
+
 ```
