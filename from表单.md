@@ -36,3 +36,15 @@
   <option>选项3</option>
 </select>
 ```
+
+### 禁止表单自动填充文本框
+
+```javascript
+autocomplete = 'off'
+```
+
+### 禁用按钮
+
+```javascript
+<button type='submit' disabled='true'>
+```

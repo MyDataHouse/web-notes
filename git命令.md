@@ -130,10 +130,12 @@ ssh -T git@gitee.com
 git clone 你的仓库链接
 ```
 
-## 18.查看分支列表
+## 18.查看分支列表,查看分支从谁分出来的
 
 ```shell
 git branch
+#
+git reflog show --date=iso 分支名
 ```
 
 ## 19.创建分支
@@ -158,6 +160,8 @@ git switch 分支名字
 git checkout -b 分支名字
 #新的方法,建议使用这个
 git switch -c分支名字
+#设置主分支
+git branch -M 分支名
 ```
 
 ## 22.合并分支

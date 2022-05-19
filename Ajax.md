@@ -55,6 +55,8 @@ xhr.onreadystatechange=function(){
 encodeURL()
 //解码的方法
 decodeURL()
+//这个可以给对象生成一个字符串地址,在当前窗口关闭前有效
+URL.createObjectURL()
 ```
 
 ### 四.Json
