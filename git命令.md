@@ -198,6 +198,8 @@ git push -rebase origin master
 
 ```shell
 git remote show 远程仓库名称   #默认 origin
+#查看远程分支列表简略信息
+git branch -r
 ```
 
 ## 26.跟踪分支 (将远程分支下载到本地)
