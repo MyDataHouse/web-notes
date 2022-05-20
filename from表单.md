@@ -48,3 +48,16 @@ autocomplete = 'off'
 ```javascript
 <button type='submit' disabled='true'>
 ```
+
+## 获取文件的方法
+
+```javascript
+//方法一通过e对象
+function(e){
+    let file = e.target.files[0];
+}
+//放法2
+function(){
+    let file = $('[input=file]')[0].files[0];
+}
+```
