@@ -136,6 +136,9 @@ git clone 你的仓库链接
 git branch
 #
 git reflog show --date=iso 分支名
+# 查看merge和checkout记录
+git reflog show --date=local | grep 分支
+名
 ```
 
 ## 19.创建分支
