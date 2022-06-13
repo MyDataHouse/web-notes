@@ -161,7 +161,15 @@ export const data = {
       ]
     }
   ],
-  "git": {},
+  "git": {
+    "contributors": [
+      {
+        "name": "ironBUll",
+        "email": "luzhansanlvlbb@163.com",
+        "commits": 1
+      }
+    ]
+  },
   "filePathRelative": "base/css.md"
 }
 
