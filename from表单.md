@@ -49,7 +49,7 @@ autocomplete = 'off'
 <button type='submit' disabled='true'>
 ```
 
-## 获取文件的方法
+## 获取文件的方法,value
 
 ```javascript
 //方法一通过e对象
@@ -61,3 +61,7 @@ function(){
     let file = $('[input=file]')[0].files[0];
 }
 ```
+
+1. 表单获取的文件路径在value属性中,想要重复选择,要清空value,触发change事件 
+
+2. 使用window.URL.createObjectURL()来吧对象转换成URL路径

@@ -178,7 +178,7 @@ var arr = new Array();
 1. typeof检测数据类型
    
    ```javascript
-   typeof arr == object;
+   typeof arr == 'object';
    ```
 
 2. instanceof检测数据类型
@@ -379,6 +379,7 @@ var arr = new Array();
    
    | 事件对象属性和方法           | 说明                          |
    | ------------------- | --------------------------- |
+   | e.currentTarget     | 返回事件绑定的对象                   |
    | e.target            | 返回触发事件的对象                   |
    | e.srcElement        | 返回触发事件的对象IE6-8使用            |
    | e.type              | 返回事件的类型如：click              |
@@ -424,9 +425,10 @@ var arr = new Array();
 
 ##### 7.3 键盘事件对象
 
-| 键盘事件对象属性  | 说明          |
-| --------- | ----------- |
-| e.keyCode | 返回改键的ASCII值 |
+| 键盘事件对象属性         | 说明          |
+| ---------------- | ----------- |
+| ~~e.keyCode~~    | 返回改键的ASCII值 |
+| e.key == 'enter' | 判断按下的按键     |
 
 ##### 7.4 window对象的常见事件
 

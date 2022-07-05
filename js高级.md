@@ -274,10 +274,10 @@ arr = JSON.parse(sessionStorage.getItem("data"));
 #### 1.创建正则表达式
 
 ```javascript
-var regexp = new RegExp(/123/);
+var regexp = new RegExp(/123/,'gi');
 console.log(regexp);
 //2.字面量创建
-var rg = /123/;
+var rg = /123/gi;
 ```
 
 #### 2.测试正则表达式
@@ -347,4 +347,55 @@ console.log(str);
 
 ```javascript
 ['{{name}}', 'name', index: 5, input: '<div>{{name}}今年</div>', groups: undefined]0: "{{name}}"1: "name"groups: undefinedindex: 5input: "<div>{{name}}今年</div>"length: 2[[Prototype]]: Array(0)
+```
+
+### 十.this指向改变
+
+call()方法
+
+```javascript
+var Person = {
+    name: "zhangsan",
+    age: 19
+}
+
+function aa(x, y) {
+    console.log(x + "," + y);
+    console.log(this);
+    console.log(this.name);
+}
+
+aa(4, 5); //this指向window--4,5  window  空
+
+aa.call(Person, 4, 5); //this指向Person--4,5  Person{}对象  zhangsan
+```
+
+apply() 与call（） 非常相似， 不同之处在于提供参数的方式， apply（） 使用参数数组， 而不是参数列表
+
+```javascript
+var Person = {
+    name: "zhangsan",
+    age: 19
+}
+
+function aa(x, y) {
+    console.log(x + "," + y);
+    console.log(this);
+    console.log(this.name);
+}
+
+aa.apply(Person, [4, 5]); //this指向Person--4,5  Person{}对象  zhangsan
+```
+
+bind() 创建的是一个新的函数（ 称为绑定函数）， 与被调用函数有相同的函数体， 当目标函数被调用时this的值绑定到 bind() 的第一个参数上
+
+```javascript
+var oDiv1 = document.getElementById("div1");
+oDiv1.onclick = function () {
+    var _this = this; //将this储存在变量中，而且不改变定时器的指向
+    setTimeout(function () {
+        console.log(_this); //注意这里是_this，而不是this-- <div id="div1">点击</div>
+        console.log(this); //定时器的指向没有被改变--仍然是window
+    }, 1000)
+}
 ```

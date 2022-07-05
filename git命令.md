@@ -338,3 +338,18 @@ Host github.com
 User git
 ProxyCommand connect -H 127.0.0.1:1080 %h %p
 ```
+
+## 33.查看分支图
+
+```git
+git log --graph --all
+```
+
+## 34.查看分支包含的文件
+
+```git
+//切换分支并且查看分支文件
+git checkout 分支名 && ls
+//查看当前分支的内容
+ls
+```
