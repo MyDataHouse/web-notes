@@ -281,9 +281,11 @@ $ git fetch origin dev [示例2：获取远端的origin/dev分支]
 #查看版本差异
 $ git log -p master..origin/master [示例1：查看本地master与远端origin/master的版本差异]
 $ git log -p dev..origin/dev   [示例2：查看本地dev与远端origin/dev的版本差异]
+$ git log -p FETCH_HEAD [取回更新后会返回一个FETCH_HEAD,指的是某个分支的远程最新状态,查看最新状态]
 #合并最新代码到本地分支
 $ git merge origin/master  [示例1：合并远端分支origin/master到当前分支]
 $ git merge origin/dev [示例2：合并远端分支origin/dev到当前分支]
+$ git merge FETCH_HEAD [将拉取下来最新内容合并到当前分支]
 ```
 
 ## 31.暂时保存工作区文件,防止被带到其他分支
@@ -295,6 +297,8 @@ git stash save "修改的信息"
 git stash list
 #回到保存的文件版本
 git stash apply stash@{0}
+#删除指定id 的stash
+git stash drop [stash_id]
 #：删除所有缓存的 stash。
 git stash clear 
 ```

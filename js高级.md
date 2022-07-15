@@ -115,7 +115,7 @@ var son = new son('刘德华');
 ### 四.ES5遍历数组方法
 
 1. forEach()
-   
+  
    ```javascript
    arr.forEach(function(value, index, array) {
           //参数一是:数组元素
@@ -126,7 +126,7 @@ var son = new son('刘德华');
    ```
 
 2. filter() 筛选
-   
+  
    ```javascript
    var arr = [12, 66, 4, 88, 3, 7];
      var newArr = arr.filter(function(value, index,array) {
@@ -139,7 +139,7 @@ var son = new son('刘德华');
    ```
 
 3. some() 查找返回布尔值
-   
+  
    ```javascript
    some 查找数组中是否有满足条件的元素 
     var arr = [10, 30, 4];
@@ -163,7 +163,7 @@ string.trim()
 ### 六.获取设置对象的属性名
 
 1. 获取对象的属性名,Object.keys(对象),返回数组
-   
+  
    ```javascript
    var obj = {
        id:1,
@@ -399,3 +399,53 @@ oDiv1.onclick = function () {
     }, 1000)
 }
 ```
+
+### 十一 遍历高级语法
+
+| 方法             | 参数                                       | 作用                                                         | 返回值                                            |
+| ---------------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------- |
+| Object.keys()    | 要返回枚举自身属性的对象(数组,对象,字符串) | 处理对象,返回可枚举的属性数组                                | 一个表示给定对象的所有可枚举属性的字符串数组      |
+| Object.assign()  | 要拷贝或合并对象或数组                     | 对象拷贝,对象合并,原始类型包装为对象                         | 拷贝,或合并的新对象,或数组                        |
+| Object.entries() | 可以返回其可枚举属性的键值对的对象。       | `**Object.entries()**`方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 [`for...in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in) 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）。 | 给定对象自身可枚举属性的键值对数组。              |
+| .next()          | 对象或数组,字符串                          | 方便依次拿出对象或数组中的值                                 | 返回对象包含两个值doen,布尔值,value迭代器遍历的值 |
+| Object.values()  | 被返回可枚举属性值的对象。                 | `**Object.values()**`方法返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用[`for...in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in)循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。 | 返回一个给定对象自身的所有可枚举属性值的数组      |
+|                  |                                            |                                                              |                                                   |
+|                  |                                            |                                                              |                                                   |
+|                  |                                            |                                                              |                                                   |
+|                  |                                            |                                                              |                                                   |
+
+##### Object.assign()
+
+```javascript
+//对象拷贝
+var a = {a:'ls'}
+var b = Object.assign(a)
+//对象合并
+var c = {b: 'ww'}
+var d = {a:'ll'}
+var b = Object.assign(a,c,d) //{a:'ll',b:'ww'} 属性被后续参数中具有相同属性的其他值覆盖
+//原始类型包装为对象
+const v1 = "abc";
+const v2 = true;
+const v3 = 10;
+const v4 = Symbol("foo")
+
+const obj = Object.assign({}, v1, null, v2, undefined, v3, v4); 
+// 原始类型会被包装，null 和 undefined 会被忽略。
+// 注意，只有字符串的包装对象才可能有自身可枚举属性。
+console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+```
+
+##### Object.entries()
+
+```javascript
+//完整写法
+const obj = { a: 5, b: 7, c: 9 };
+for (const [key, value] of Object.entries(obj)) {
+  console.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
+}
+//简易写法
+const obj = { foo: 'bar', baz: 42 };
+console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+```
+

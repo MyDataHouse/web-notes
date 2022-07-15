@@ -92,6 +92,8 @@ yarn build
 
 ```
 yarn cache list
+//清空缓存
+yarn chche clean
 ```
 
 ### 十二.缓存目录

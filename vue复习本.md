@@ -28,24 +28,55 @@ arr&&arr.length
 |                                                     |      |                     |
 |                                                     |      |                     |
 
+#### v-model高级用法
+
+一个组件上的 `v-model` 默认会利用名为 `value` 的 prop 和名为 `input` 的事件，但是像单选框、复选框等类型的输入控件可能会将 `value` attribute 用于[不同的目的](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value)。`model` 选项可以用来避免这样的冲突：
+
+```javascript
+Vue.component('base-checkbox', {
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
+  props: {
+    checked: Boolean
+  },
+  template: `
+    <input
+      type="checkbox"
+      v-bind:checked="checked"
+      v-on:change="$emit('change', $event.target.checked)"
+    >
+  `
+})
+```
+
+现在在这个组件上使用 `v-model` 的时候：
+
+```javascript
+<base-checkbox v-model="lovingVue"></base-checkbox>
+```
+
+
+
 ### vue修饰符
 
-| 符号       | 说明           |
-| -------- | ------------ |
-| .stop    | 停止冒泡         |
-| .prevent | 阻止默认事件       |
-| .once    | 只执行一次的事件     |
-| .number  | 把数字字符串,转换成数字 |
-| .trim    | 去除两边多余的空格    |
-| .lazy    | 失去焦点提交值      |
-|          |              |
-|          |              |
-|          |              |
-|          |              |
-|          |              |
-|          |              |
-|          |              |
-|          |              |
+| 符号     | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| .stop    | 停止冒泡                                                     |
+| .prevent | 阻止默认事件                                                 |
+| .once    | 只执行一次的事件                                             |
+| .number  | 把数字字符串,转换成数字                                      |
+| .trim    | 去除两边多余的空格                                           |
+| .lazy    | 失去焦点提交值                                               |
+| .native  | 给组件原始标签添加原生事件,鼠标事件大多不用加,键盘事件要添加这个修饰符 |
+| .sync    | 子组件向父组件传值的语法糖,子组件通过$emit('updata:父组件传的值的名称',值) |
+|          |                                                              |
+|          |                                                              |
+|          |                                                              |
+|          |                                                              |
+|          |                                                              |
+|          |                                                              |
 
 ### vue生成阶段
 
@@ -324,7 +355,7 @@ exprot default:{
 //App.vue中
 <templete>
  <zujian>
-  <templete v-slot='scope'>//固定语法,scope名字随意
+  <templete v-slot='scope'>//固定语法,scope名字随意,也可以直接结构{row}
     {{scope.row.oname}}
   </templete>
  </zujian>

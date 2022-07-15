@@ -48,7 +48,7 @@ obj.name = '我的世界';
 ```
 
 5. 删除属性
-   
+  
    ```javascript
    var obj = {};
    obj.name = '我的世界';
@@ -108,20 +108,20 @@ var arr = new Array();
 ```
 
 2. 数组的增删查改
-   
-   | 方法名                     | 说明                                                                                       | 返回值                |
-   | ----------------------- | ---------------------------------------------------------------------------------------- | ------------------ |
-   | push(参数1，参数2)           | 从末尾添加一个或多个元素，修改原数组                                                                       | 返回新数组的长度           |
-   | pop()                   | 从末尾删除一个元素，数组长度减一，修改原数组                                                                   | 返回删除元素的值           |
-   | unshift(参数1，参数2)        | 从开头添加一个或多个元素，修改原数组                                                                       | 返回新数组的长度           |
-   | shift()                 | 从开头删除一个元素，数组长度减一，修改原数组                                                                   | 返回删除的元素            |
-   | arr.**concat**(数组1，数组2) | 连接两个或多个数组，不影响原数组                                                                         | 返回一个新数组            |
-   | slice()                 | 数组截取slice(start,[end]);start的值表示从数组中的哪个位置开始可以为负值，负值表示倒数，end值可选表示到数组的哪个位置停止截取不会取到end      | 返回被截取的新数组          |
-   | splice()                | 数组删除splice(第几个开始，要删几个数，要添加的元素);要删几个数可以为负数表示倒数，如果负值超过了数组本身的长度则归0，要删除的数如果超出了数组本身的大小会把数组清空。 | 返回被删除或新增的数组，会改变原数组 |
-   | arr.toString()          | 把数组转化为字符串，逗号分割每一项。不影响原数组                                                                 | 返回一个字符串，           |
-   | join('分隔符');            | 以分隔符为准分割每一项，转化为数组，不影响原数组                                                                 | 返回一个字符串            |
-   | reverse()               | 颠倒数组中元素的顺序，改变原来的数组                                                                       | 返回新数组              |
-   | sort()                  | 对数组的元素进行排序，改变原数组                                                                         | 返回新数组              |
+  
+   | 方法名                       | 说明                                                         | 返回值                               |
+   | ---------------------------- | ------------------------------------------------------------ | ------------------------------------ |
+   | push(参数1，参数2)           | 从末尾添加一个或多个元素，修改原数组                         | 返回新数组的长度                     |
+   | pop()                        | 从末尾删除一个元素，数组长度减一，修改原数组                 | 返回删除元素的值                     |
+   | unshift(参数1，参数2)        | 从开头添加一个或多个元素，修改原数组                         | 返回新数组的长度                     |
+   | shift()                      | 从开头删除一个元素，数组长度减一，修改原数组                 | 返回删除的元素                       |
+   | arr.**concat**(数组1，数组2) | 连接两个或多个数组，不影响原数组                             | 返回一个新数组                       |
+   | slice()                      | 数组截取slice(start,[end]);start的值表示从数组中的哪个位置开始可以为负值，负值表示倒数，end值可选表示到数组的哪个位置停止截取不会取到end | 返回被截取的新数组                   |
+   | splice()                     | 数组删除splice(第几个开始，要删几个数，要添加的元素);要删几个数可以为负数表示倒数，如果负值超过了数组本身的长度则归0，要删除的数如果超出了数组本身的大小会把数组清空。 | 返回被删除或新增的数组，会改变原数组 |
+   | arr.toString()               | 把数组转化为字符串，逗号分割每一项。不影响原数组             | 返回一个字符串，                     |
+   | join('分隔符');              | 以分隔符为准分割每一项，转化为字符串，不影响原数组           | 返回一个字符串                       |
+   | reverse()                    | 颠倒数组中元素的顺序，改变原来的数组                         | 返回新数组                           |
+   | sort()                       | 对数组的元素进行排序，改变原数组                             | 返回新数组                           |
    
    ES6新增方法
    
@@ -176,17 +176,36 @@ var arr = new Array();
 #### 5.检测数据类型
 
 1. typeof检测数据类型
-   
+  
    ```javascript
    typeof arr == 'object';
    ```
 
 2. instanceof检测数据类型
-   
+  
    ```javascript
    arr instanceof Array;//true
    arr instanceof String//flase
    ```
+
+#### 6.关于对象和数组的浅拷贝和深拷贝
+
+- 浅拷贝只复制原数组或对象在栈中的指针,指向同一个堆内存
+
+- 浅拷贝的对象修改数据会互相影响,深拷贝不会
+
+  ```javascript
+  //浅拷贝
+  var a = {a:'ls'}
+  var b = a
+  //深拷贝
+  var b = JSON.parse(JSON.stringify(a))
+  //loadsh提供了函数库来深拷贝
+  import _ = from 'loadsh'
+  var b = _.cloneDeep(a)
+  ```
+
+  
 
 ### API易忘点
 
@@ -215,7 +234,7 @@ var arr = new Array();
 2. 通过.className完全覆盖原有的class名称
 
 3. 通过.classList方法添加删除替换类名
-   
+  
    ```javascript
    ul.classList.add('class');//添加类名
    ul.classList.remove('class');//删除类名
@@ -228,20 +247,20 @@ var arr = new Array();
 #### 3.自定义属性操作
 
 1. 创建自定义属性
-   
+  
    ```javascript
    ul.setAttribute('data-index',1)//前面为属性，后面为属性值
    ```
 
 2. 获得属性（与i可以获得内置属性）
-   
+  
    ```javascript
    ul.getAttribute('data-index');
    ul.dataset.index||ul.dataset['index']//H5新增
    ```
 
 3. 移除属性
-   
+  
    ```javascript
    ul.reomveAttribute('data-index');
    ```
@@ -249,14 +268,14 @@ var arr = new Array();
 #### 4.节点操作
 
 1. 父级节点
-   
+  
    ```javascript
    <ul><li></li></ul>
    li.parentNode//返回离Li最近的父节点，如果指定的节点没有父节点返回null
    ```
 
 2. 子节点
-   
+  
    ```javascript
    ul.childNods//返回了ul包含的所有子节点，包括文本，元素节点，不使用
    ul.children//返回了ul包含的所有元素子节点
@@ -265,7 +284,7 @@ var arr = new Array();
    ```
 
 3. 子节点不经常使用的方法
-   
+  
    | 方法                   | 说明               |
    | -------------------- | ---------------- |
    | ul.firstChild        | 返回第一个子节点，包含文字节点  |
@@ -274,7 +293,7 @@ var arr = new Array();
    | ul.lastElementChild  | 返回最后一个元素节点，H5新增  |
 
 4. 兄弟节点
-   
+  
    ```javascript
    ul.nextSibLing;//下一个兄第节点，包含元素，文字节点
    ul.previousSibLing//上一个兄弟节点，包含元素文字节点
@@ -284,7 +303,7 @@ var arr = new Array();
    ```
 
 5. nextSibLing问题解决
-   
+  
    ```javascript
    function getNextElementSibling(element) {
          var el = element;
@@ -300,13 +319,13 @@ var arr = new Array();
 ##### 5.节点的增删
 
 1. 创建节点（使用innerHTML创建多个元素时为了提高效率，把元素放到数组中一次性创建，此时效率比createElement高）
-   
+  
    ```javascript
    var li = document.createElement('li');//创建了一个Li节点
    ```
 
 2. 添加节点
-   
+  
    ```javascript
    ul.appendChild(li);//给ul末尾添加了节点
    ul.insertBefore(li,ul.children[0])//第一个参数是要添加的节点
@@ -314,13 +333,13 @@ var arr = new Array();
    ```
 
 3. 删除节点
-   
+  
    ```javascript
    ul.removeChild(ul.children[0])//只能删除子节点
    ```
 
 4. 克隆节点
-   
+  
    ```javascript
    ul.cloneNode(true);//参数为true表示深拷贝，不写或false表示浅拷贝
    ```
@@ -328,7 +347,7 @@ var arr = new Array();
 #### 6.事件操作
 
 1. 事件注册的方式
-   
+  
    ```javascript
    //传统的注册方式，缺点只能注册一次
    ul.onclick = function(){}
@@ -339,7 +358,7 @@ var arr = new Array();
    ```
 
 2. 事件删除方式
-   
+  
    ```javascript
    //传统方式
    ul.onclick = function(){
@@ -360,7 +379,7 @@ var arr = new Array();
 #### 7.事件对象
 
 1.  事件对象的使用
-   
+  
    ```javascript
    ul.onclick = function (event){
    var event = event || window.event;//兼容性写法为了兼容IE6-8
@@ -376,7 +395,7 @@ var arr = new Array();
    ```
 
 2. 事件对象的属性和方法
-   
+  
    | 事件对象属性和方法           | 说明                          |
    | ------------------- | --------------------------- |
    | e.currentTarget     | 返回事件绑定的对象                   |
@@ -389,7 +408,7 @@ var arr = new Array();
    | e.stopPropagation() | 阻止冒泡                        |
 
 3. e.target和this的区别
-   
+  
    ```javascript
    <ul>
        <li>abc</li>
@@ -405,7 +424,7 @@ var arr = new Array();
    ```
 
 4. 常见鼠标事件对象
-   
+  
    | 鼠标事件对象    | 说明                      |
    | --------- | ----------------------- |
    | e.clientX | 返回鼠标相对于浏览器窗口可视区的x坐标     |
@@ -433,14 +452,14 @@ var arr = new Array();
 ##### 7.4 window对象的常见事件
 
 1. 页面加载事件
-   
+  
    ```javascript
    window.onload = function (){};
    window.addEventListener('load',function(){});
    ```
 
 2. 调整窗口大小事件
-   
+  
    (只要发生窗口大小变化就会触发这个时间配合<mark>window.innerWidth</mark>使用)
    
    ```javascript
@@ -451,7 +470,7 @@ var arr = new Array();
 ##### 7.5 定时器
 
 1. 延时定时器
-   
+  
    ```javascript
    //设置定时器
    var time = setTimeout(function,延迟的毫秒数)；
@@ -460,7 +479,7 @@ var arr = new Array();
    ```
 
 2. 重复定时器
-   
+  
    ```javascript
    //设置定时器
    var time = setInterval(function, 毫秒数);
@@ -584,3 +603,12 @@ function getScroll() {
 | changedTouches | 手指状态发生改变的手指列表，从无到有或从有到无 |
 
 ###### 1.动画过渡结束触发事件<mark>transitionend</mark>
+
+#### 13.其他常见事件
+
+| 事件名   | 事件说明                                                     |
+| -------- | ------------------------------------------------------------ |
+| onerror  | 在dom于元素执行错误时自动触发的事件如img图片路径错误找不到图片时 |
+| onchange | 在表单元素内容改变时触发,button选中状态改变,input输入文字改变时file选中文件改变时触发 |
+|          |                                                              |
+
