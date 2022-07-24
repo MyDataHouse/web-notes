@@ -3,13 +3,13 @@
 ### 去掉`input textarea`的默认样式
 
 1. `iniput:text/search`去掉获取焦点时出现的边框
-   
+  
    1. `input{outline:none}`
    2. 在标签内设置`maxlength`规定文本框内的最大数值
    3. 在标签内设置`placeholder`设置文本框内的默认显示文本
 
 2. `textarea`控制文本域缩放
-   
+  
    1. `textare{resize:none}`（禁止缩放）
 
 3. `required`设置表单必填项
@@ -52,11 +52,11 @@ autocomplete = 'off'
 ## 获取文件的方法,value
 
 ```javascript
-//方法一通过e对象
+//方法一通过e对象,获取File类型对象
 function(e){
     let file = e.target.files[0];
 }
-//放法2
+//放法2,获取File类型对象
 function(){
     let file = $('[input=file]')[0].files[0];
 }

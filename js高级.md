@@ -409,7 +409,7 @@ oDiv1.onclick = function () {
 | Object.entries() | 可以返回其可枚举属性的键值对的对象。       | `**Object.entries()**`方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 [`for...in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in) 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）。 | 给定对象自身可枚举属性的键值对数组。              |
 | .next()          | 对象或数组,字符串                          | 方便依次拿出对象或数组中的值                                 | 返回对象包含两个值doen,布尔值,value迭代器遍历的值 |
 | Object.values()  | 被返回可枚举属性值的对象。                 | `**Object.values()**`方法返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用[`for...in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in)循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。 | 返回一个给定对象自身的所有可枚举属性值的数组      |
-|                  |                                            |                                                              |                                                   |
+| .map()           | 要处理的方法                               | 遍历数组进行处理return一个结果                               | 返回一个新数组                                    |
 |                  |                                            |                                                              |                                                   |
 |                  |                                            |                                                              |                                                   |
 |                  |                                            |                                                              |                                                   |
@@ -447,5 +447,78 @@ for (const [key, value] of Object.entries(obj)) {
 //简易写法
 const obj = { foo: 'bar', baz: 42 };
 console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+```
+
+### 十二. FileReader对象读取文件
+
+`**FileReader**` 对象允许 Web 应用程序异步读取存储在用户计算机上的文件（或原始数据缓冲区）的内容，使用 [`File`](https://developer.mozilla.org/zh-CN/docs/Web/API/File) 或 [`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob) 对象指定要读取的文件或数据。
+
+## [属性](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader#method_overview)
+
+- [`FileReader.error`](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/error) 只读
+
+  一个[`DOMException`](https://developer.mozilla.org/zh-CN/docs/Web/API/DOMException)，表示在读取文件时发生的错误 。
+
+- [`FileReader.readyState`](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/readyState) 只读
+
+  表示`FileReader`状态的数字。取值如下:
+
+  | 常量名  | 值   | 描述                 |
+  | ------- | ---- | -------------------- |
+  | EMPTY   | 0    | 还没有加载任何数据   |
+  | LOADING | 1    | 数据正在被加载       |
+  | DONE    | 2    | 已完成全部的读取请求 |
+
+  方法:传入的参数为 file文件
+
+  | 方法名                         | 作用                                                         |
+  | ------------------------------ | ------------------------------------------------------------ |
+  | FileReader.onabort()           | 中止读取操作。在返回时，`readyState`属性为`DONE`。           |
+  | FileReader.readAsArrayBuffer() | 开始读取指定的 [`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)中的内容，一旦完成，result 属性中保存的将是被读取文件的 [`ArrayBuffer`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) 数据对象。 |
+  | FileReader.readAsDataURL()     | 开始读取指定的[`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)中的内容。一旦完成，`result`属性中将包含一个`data:` URL 格式的 Base64 字符串以表示所读取文件的内容。 |
+  | FileReader.readAsText()        | 开始读取指定的[`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)中的内容。一旦完成，`result`属性中将包含一个字符串以表示所读取的文件内容。 |
+  |                                |                                                              |
+
+  事件处理
+
+  | 事件名                 | 介绍                                                         |
+  | ---------------------- | ------------------------------------------------------------ |
+  | FileReader.onabort     | 处理`abort (en-US)`事件。该事件在读取操作被中断时触发。      |
+  | FileReader.onerror     | 处理`error (en-US)`事件。该事件在读取操作发生错误时触发。    |
+  | FileReader.onload      | 处理`load (en-US)`事件。该事件在读取操作完成时触发。         |
+  | FileReader.onloadstart | 处理`loadstart (en-US)`事件。该事件在读取操作开始时触发。    |
+  | FileReader.onloadend   | 处理`loadend (en-US)`事件。该事件在读取操作结束时（要么成功，要么失败）触发。 |
+  | FileReader.onprogress  | 处理`progress (en-US)`事件。该事件在读取[`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)时触发。 |
+
+  
+
+### Worker接口创建多线程不影响gui渲染引擎
+
+创建一个专用 Web worker，它只执行 URL 指定的脚本。使用 [Blob URL](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob) 作为参数亦可。
+
+| 被创建的worker使用的方法名(这里的Worker也可以使用self) | 说明                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| Worker.postMessage()                                   | 发送一条消息到最近的外层对象，消息可由任何 JavaScript 对象组成。 |
+| Worker.terminate()                                     | 立即终止 worker。该方法不会给 worker 留下任何完成操作的机会；就是简单的立即停止。Service Woker 不支持这个方法。 |
+
+监听wokrer的执行
+
+| 事件名(worker是创建的wokrer实例对象) | 说明                                  |
+| ------------------------------------ | ------------------------------------- |
+| Worker.onmessage                     | 创建的线程传回postMessage()方法时触发 |
+| Worker.onerror                       | 创建的线程执行错误时触发              |
+| Worker.onmessageerror                | 创建的线程发回错误消息时触发          |
+
+例子
+
+```javascript
+var myWorker = new Worker('worker.js'); //这里的worker.js是文件路径在同级下直接写名字
+
+  myWorker.onmessage = e => {
+      console.log(e.data)
+  }
+  
+  //在worker.js中
+  self.postMessage('abc')
 ```
 

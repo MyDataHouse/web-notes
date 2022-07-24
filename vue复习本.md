@@ -115,6 +115,32 @@ Vue.component('base-checkbox', {
 |           |                                         |
 |           |                                         |
 
+### vue自定义指令
+
+```javascript
+//在单独的文件中定义自定义指令再在main.js中通过循环注册指令
+export const imagerror = { //指令名,使用时加上v-
+  inserted: function(dom, options) {  //dom渲染就执行,使用指令的节点,options是传入指令的参数
+    dom.src = dom.src.trim() || options
+    dom.onerror = function() {
+      dom.src = options.value
+    }
+  },
+  componentUpdated(dom, options) { //dom更新后就执行
+    dom.src = dom.src || options.value
+  }
+}
+
+//main.js中注册指令
+import directives form '@/directives'//导入自定义指令文件
+Object.keys(directives).forEach(item => {
+  // 遍历注册自定义命令
+  Vue.directive(item, directives[item])
+})
+```
+
+
+
 ### vue组件传值
 
 1. 父组件向子组件传值
