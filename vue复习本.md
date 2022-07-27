@@ -599,3 +599,10 @@ export default {
 
    
 
+### 子模块之间的互相调用
+
+```javascript
+//在调用时传入第三个参数{ root : true }
+context.commit('permission/setRoutes', [], { root: true })
+```
+
