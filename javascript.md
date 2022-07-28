@@ -151,19 +151,21 @@ var arr = new Array();
 
 1. <mark>字符串的不可变</mark>，指的是虽然看上去改变了内容但其实时地址变了，内存中开辟了新的空间
 
-| 方法名                        | 说明                                                                         | 返回值               |
-| -------------------------- | -------------------------------------------------------------------------- | ----------------- |
-| indexOf('值'，fromIndex)     | indexOf() 方法返回调用它的 String 对象中第一次出现的指定值的索引，从 fromIndex 处进行搜索。如果未找到该值，则返回 -1 | 如果找到值返回下标,找不到返回-1 |
-| lastIndexOf('值'，fromIndex) | 跟indexOf相反从后往前找，找到该值最后出现的位置                                                | 找到返回下标，找不到返回-1    |
-| charAt(索引号)                | 根据索引号返回该位置的值，用来遍历字符串                                                       | 返回指定位置的值          |
-| charCodeAt()               | 表示给定索引处的 UTF-16 代码单元,UTF-16 编码单元匹配能用一个 UTF-16 编码单元表示的 Unicode 码点           |                   |
-| codePointAt()              | 方法返回 一个 Unicode 编码点值的非负整数。                                                 |                   |
-| str.concat(str2,str3)      | 连接两个或多个字符串拼接字符等效于+ +                                                       | 返回新的字符串           |
-| substr(start,length)       | 从start位置开始，length取的个数                                                      | 返回新的字符串           |
-| slice(start,end)           | 从start开始截取到end位置,不包括end                                                    | 返回新的字符串           |
-| substring(start,end)       | 从start开始截取到end位置,不包括end,不接受负值                                              | 返回新的字符串           |
-| replace('被替换的值','替换的值')    | 利用循环和indexOf替换想要替换的值                                                       | 返回新的字符串           |
-| split(’分割字符‘)              | 把字符串以分割字符为准转化为数组                                                           | 返回数组              |
+| 方法名                           | 说明                                                         | 返回值                          |
+| -------------------------------- | ------------------------------------------------------------ | ------------------------------- |
+| indexOf('值'，fromIndex)         | indexOf() 方法返回调用它的 String 对象中第一次出现的指定值的索引，从 fromIndex 处进行搜索。如果未找到该值，则返回 -1 | 如果找到值返回下标,找不到返回-1 |
+| lastIndexOf('值'，fromIndex)     | 跟indexOf相反从后往前找，找到该值最后出现的位置              | 找到返回下标，找不到返回-1      |
+| charAt(索引号)                   | 根据索引号返回该位置的值，用来遍历字符串                     | 返回指定位置的值                |
+| charCodeAt()                     | 表示给定索引处的 UTF-16 代码单元,UTF-16 编码单元匹配能用一个 UTF-16 编码单元表示的 Unicode 码点 |                                 |
+| codePointAt()                    | 方法返回 一个 Unicode 编码点值的非负整数。                   |                                 |
+| str.concat(str2,str3)            | 连接两个或多个字符串拼接字符等效于+ +                        | 返回新的字符串                  |
+| substr(start,length)             | 从start位置开始，length取的个数                              | 返回新的字符串                  |
+| slice(start,end)                 | 从start开始截取到end位置,不包括end                           | 返回新的字符串                  |
+| substring(start,end)             | 从start开始截取到end位置,不包括end,不接受负值                | 返回新的字符串                  |
+| replace('被替换的值','替换的值') | 利用循环和indexOf替换想要替换的值                            | 返回新的字符串                  |
+| split(’分割字符‘)                | 把字符串以分割字符为准转化为数组                             | 返回数组                        |
+| str.toUpperCase()                | 把字符串转换为大写字母                                       | 返回新字符串                    |
+| str.toLowerCase()                | 把字符串转换为小写字母                                       | 返回新字符串                    |
 
 #### ES6新增方法
 
@@ -186,6 +188,9 @@ var arr = new Array();
    ```javascript
    arr instanceof Array;//true
    arr instanceof String//flase
+   
+   //也可以用来判断a是不是在b的原型链上
+   a instanceof b
    ```
 
 #### 6.关于对象和数组的浅拷贝和深拷贝

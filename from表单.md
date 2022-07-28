@@ -49,6 +49,14 @@ autocomplete = 'off'
 <button type='submit' disabled='true'>
 ```
 
+### 设置表单元素为只读
+
+```javascript
+<input type='text' readonly>
+```
+
+
+
 ## 获取文件的方法,value
 
 ```javascript
