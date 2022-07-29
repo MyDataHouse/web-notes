@@ -28,14 +28,14 @@ var box = $(box);
 ### 3.类的操作
 
 1. 直接修改行内样式
-   
+  
    ```javascript
    $('.box').css('color','red');
    $('.box').css({color:'red',fontSize:12})
    ```
 
 2. 修改类名
-   
+  
    ```javascript
    //添加类名
    $('.box').addClass('');
@@ -62,7 +62,7 @@ var box = $(box);
 | fadeToggle()  | 切换  |
 
 2. 自定义动画
-   
+  
    ```javascript
    $('.box').stop().animate({left:50,bottom:30,opacity:.5},500,function)
    ```
@@ -70,13 +70,13 @@ var box = $(box);
 ### 5.属性操作
 
 1. 固有属性的获取赋值
-   
+  
    ```javascript
    $('.box').prop('属性','属性值')
    ```
 
 2. 元素自定义属性
-   
+  
    ```javascript
    $('.box').attr('属性','属性值')
    ```
@@ -134,7 +134,7 @@ $('.box').on('click',function(){});
 ```
 
 2. 事件解绑
-   
+  
    ```javascript
    //解绑该元素所有的绑定事件
    $('.box').off()
@@ -191,3 +191,12 @@ $('.box').on('click',function(){});
     })
 </script>
 ```
+
+### 13.页面渲染完毕加载
+
+```javascript
+$(document).ready(function(){
+    
+})
+```
+

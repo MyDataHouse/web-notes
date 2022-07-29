@@ -92,6 +92,15 @@
 
    ```javascript
    this.$t(key) // 全局注册后有了$t方法,参数是对应语言包的键名,返回对应的文字
+   
+   //语言包多层级结构
+   this.$t('route.' + key)
+   //语言包结构
+   export default {
+       route:{
+           
+       }
+   }
    ```
 
    
