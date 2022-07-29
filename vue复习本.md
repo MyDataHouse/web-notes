@@ -606,3 +606,22 @@ export default {
 context.commit('permission/setRoutes', [], { root: true })
 ```
 
+### vue数据双向绑定原理
+
+利用Object.defineProperty()方法
+
+| 方法                    | 参数                                                       | 说明                                               |
+| ----------------------- | ---------------------------------------------------------- | -------------------------------------------------- |
+| Object.defineProperty() | 1:要定义的对象名,2:定义的属性名称,3:定义或修改的属性描述符 | 对对象重新进行定义,或添加属性,对属性值进行相关操作 |
+
+参数描述符
+
+| 描述符(按照属性名使用) | 说明                                                         |
+| ---------------------- | ------------------------------------------------------------ |
+| configurable           | 当且仅当该属性的 `configurable` 键值为 `true` 时，该属性的描述符才能够被改变，同时该属性也能从对应的对象上被删除。<br/>**默认为** **`false`**。 |
+| enumerable             | 当且仅当该属性的 `enumerable` 键值为 `true` 时，该属性才会出现在对象的枚举属性中。<br/>**默认为 `false`**。 |
+| value                  | 该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。<br/>**默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。 |
+| writable               | 当且仅当该属性的 `writable` 键值为 `true` 时，属性的值，也就是上面的 `value`，才能被[`赋值运算符` (en-US)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#assignment_operators)改变。<br/>**默认为 `false`。** |
+| get                    | 属性的 getter 函数，如果没有 getter，则为 `undefined`。当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 `this` 对象（由于继承关系，这里的`this`并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值。<br/>**默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。 |
+| set                    | 属性的 setter 函数，如果没有 setter，则为 `undefined`。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 `this` 对象。<br/>**默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。 |
+
