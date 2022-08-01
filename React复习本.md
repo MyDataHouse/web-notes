@@ -93,3 +93,137 @@
 3. 通过单花括号来使用表达式(vue使用双花括号)
    - 有值的,可以计算结果并返回的,都可以说是表达式
    - 如果要输出函数本身可以使用{函数名 + ''}的方式
+
+## 4.组件
+
+1. 函数式组件
+
+   - 在不使用hooks的情况下,函数组件是无状态的,数据不能驱动视图
+   - 负责页面展示,性能高
+
+   ```javascript
+   const Hellow = () => {return <h1>hellow word </h1>}
+   root.render(<Hellow />)
+   ```
+
+   <mark>组件名必须以大写英文开头</mark>
+
+2. class组件
+
+   - 类组件是有状态组件,数据驱动视图
+   - 有自己的数据,比函数组件性能低
+   - 修改state中的状态,需要使用setState方法
+   - react核心理念,状态不可变(不建议直接修改state中的值)
+   
+   ```javascript
+   class Hellow extends React.Component {
+       state:{
+           name: '张三'
+       }
+       ceshi = () => {
+           setState(){
+               this.state.name = '李四'
+           }
+       }
+       render(){
+           return <h1 onClick={this.ceshi}>hellow {this.state.name} </h1>
+       }
+   }
+   
+   root.render(<Hellow />)
+   ```
+   
+   
+
+### 4.1 组件分离
+
+```javascript
+//在单独的js文件中 ,也可以按需导入,导出
+export default const Hellow = () => {return <h1>hellow word </h1>}
+                      
+//在index.js中
+import Hellow from './hellow'
+root.render(<Hellow />)                                   
+```
+
+### 4.2 表单处理-受控组件
+
+**内容**：
+
++ HTML中表单元素是可输入的，即表单元素维护着自己的可变状态（value）
++ 但是在react中，可变状态通常是保存在`state`中的，并且要求状态只能通过`setState`进行修改
++ React中将state中的数据与表单元素的value值绑定到了一起，**由state的值来控制表单元素的值**
++ 受控组件：**value值受到了react状态控制的表单元素** 
+  - 原生dom中的change事件是在 , 文本框里的内容改变之后 , 失去焦点之后才会触发
+  - 但是再react中的change事件 , 是文本框的内容改变之后 , 立马就会触发 (与原生input事件一致)
+
+```javascript
+class App extends React.Component {
+  state = {
+    msg: 'hello react'
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      msg: e.target.value //e.target是下方的input , value就可以获取到input的值
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" value={this.state.msg} onChange={this.handleChange}/>
+      </div>
+    )
+  }
+}
+//ps:
+//受控组件:
+```
+
+### 4.3 非受控组件-ref
+
+**内容**
+
+- 受控组件是通过 React 组件的状态来控制表单元素的值
+
+- 非受控组件是通过**手动操作 DOM 的**方式来控制
+
+- 此时，需要用到一个新的概念：`ref`
+
+- ref：用来在 React 中获取 DOM 元素
+
+  ```javascript
+  // 1 导入 createRef 函数（ 用来创建 ref 对象 ）
+  import { createRef } from 'react'
+  
+  class Hello extends Component {
+    // 2 调用 createRef 函数来创建一个 ref 对象
+    //   ref 对象的名称（txtRef）可以是任意值
+    //   命名要规范： txt（DOM 元素的自己标识） + Ref
+    txtRef = createRef()
+  
+    handleClick = () => {
+      // 文本框对应的 DOM 元素
+      // console.log(this.txtRef.current) //ps:这里的current是固定的属性 , 就是用于获取当前txtRef绑定的dom对象
+  
+      // 4 获取文本框的值：
+      console.log(this.txtRef.current.value)
+    }
+  
+    render() {
+      return (
+        <div>
+          {/*
+          	3 将创建好的 ref 对象，设置为 input 标签的 ref 属性值
+          		作用：将 ref 和 input DOM 绑定到一起，将来在通过 this.txtRef 拿到的就是当前 DOM 对象
+          */}
+          <input ref={this.txtRef} />
+          <button onClick={this.handleClick}>获取文本框的值</button>
+        </div>
+      )
+    }
+  }
+  ```
+
+  
