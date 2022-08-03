@@ -410,7 +410,7 @@ oDiv1.onclick = function () {
 | .next()          | 对象或数组,字符串                          | 方便依次拿出对象或数组中的值                                 | 返回对象包含两个值doen,布尔值,value迭代器遍历的值 |
 | Object.values()  | 被返回可枚举属性值的对象。                 | `**Object.values()**`方法返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用[`for...in`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in)循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。 | 返回一个给定对象自身的所有可枚举属性值的数组      |
 | .map()           | 要处理的方法                               | 遍历数组进行处理return一个结果                               | 返回一个新数组                                    |
-|                  |                                            |                                                              |                                                   |
+| for of           | 跟for in一样                               | 遍历数组,字符串,map,set,arguments几乎所有可枚举对象          | 无                                                |
 |                  |                                            |                                                              |                                                   |
 |                  |                                            |                                                              |                                                   |
 

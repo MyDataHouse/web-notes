@@ -227,3 +227,46 @@ class App extends React.Component {
   ```
 
   
+
+## 5.样式处理
+
+```javascript
+ <div className={`title ${item.id === 1? 'like' : ''}`}>style样式</div>
+ <div className={item.id === 1 ? 'title like' : 'title'}>style样式</div>
+ <div className={['title', item.id===1 ? 'like' : ''].join(' ')}>style样式</div>
+ import ClassNames from 'classnames'
+ <div className={ClassNames('title', {like : item.id === 1})}>style样式</div>
+```
+
+
+
+## 6. 组件传参
+
+### 6.1父传子
+
+- 要传递数字,使用{}
+
+函数组件
+
+```javascript
+// 父组件传递
+root.render(<Hellow name='张三' tag={18}></Hellow>)
+//子组件接收
+function Hellow (props){
+    console.log(props.name)
+}
+```
+
+
+
+class组件
+
+```javascript
+// 父组件传递
+root.render(<Hellow name='张三' tag={18}></Hellow>)
+//子组件接收
+class Hellow extends Component {
+    this.props.name
+}
+```
+

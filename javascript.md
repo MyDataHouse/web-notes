@@ -24,6 +24,8 @@ var obj = 函数名(实参1,实参2);
 2.通过for in 来遍历对象
 
 ```javascript
+//for in 在高级浏览器中屏蔽了对象原型中的属性,可以使用hasOwnProperty()方法来判断在__proto__中有没有这个属性
+//Object.getOwnPrototypeNames()方法返回对像自身和继承的所有可枚举,不可枚举属性组成的数组
 for(var k in object){
     k//属性名
     object[k]//属性值
@@ -45,6 +47,9 @@ obj['name'];
 ```javascript
 var obj = {};
 obj.name = '我的世界';
+//内置对象也可以添加新属性
+Math.a = 100
+Math.__proto__.a = 100
 ```
 
 5. 删除属性
@@ -54,6 +59,31 @@ obj.name = '我的世界';
    obj.name = '我的世界';
    delete obj.name;
    ```
+
+6. 判断对象是否为空
+
+   - JSON.stringify(obj) === '{}'
+
+   - ```javascript
+     var obj = {}
+     Object.getOwnpropertyNames(obj) //返回属性组成的数组,无视枚举属性
+     ```
+
+   - ```javascript
+     var obj = {}
+     Object.keys(obj) //返回属性组成的数组,属性设置不可枚举时没用
+     ```
+
+   - ```javascript
+     function isEmpty {
+         for (let k in obj){
+        return false
+     }
+         return true
+     } //能进入 for in 循环的表示有属性 ,属性设置不可枚举时没用
+     ```
+
+   - 使用lodash _.isEmpty()方法
 
 ### 内置对象方法：
 
@@ -182,8 +212,11 @@ var arr = new Array();
   
    ```javascript
    typeof arr == 'object';
-   ```
-
+   //typeof null 结果是 object ，实际这是 typeof 的⼀个bug，null是原始值，⾮引用类型
+  //引⽤类型除了 function 其他的都是object
+  //不能用来检测Array,null
+  ```
+  
 2. instanceof检测数据类型
   
    ```javascript
