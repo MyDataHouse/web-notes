@@ -297,3 +297,43 @@ class Hellow extends Component {
 ### 6.3兄弟组件传值
 
 - 将兄弟的共享状态放在父组件中使用
+
+### 6.4 亲戚组件传值context
+
+- 导入creatContext对象
+
+  ```javascript
+  import {creatContext, Componet} from 'react'
+  ```
+
+  
+
+- 解构出provider,consumer组件
+
+  ```javascript
+  const {provider, consumer} = creatContext()
+  ```
+
+  
+
+- 传递数据使用provider组件包裹住接收数据的组件,使用value属性传递数据
+
+  ```javascript
+  <provider value = {this.state.name}>
+  	<Hellow />
+  </provider>
+  ```
+
+  
+
+- 接收数据者在要使用数据的地方使用consumer组件包裹使用函数接收数据渲染
+
+  ```javascript
+  <Hellow>
+      <consumer>
+      	{name => <h1>我的名字叫做{name}</h1>}
+      </consumer>
+  </Hellow>
+  ```
+
+  
