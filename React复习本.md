@@ -270,3 +270,30 @@ class Hellow extends Component {
 }
 ```
 
+### 6.2子传父通过回调函数
+
+函数组件
+
+```javascript
+// 父组件传递
+root.render(<Hellow callback={this.callback}></Hellow>)
+//子组件接收
+function Hellow (props){
+    console.log(props.callback(2))
+}
+```
+
+class组件
+
+```javascript
+// 父组件传递
+root.render(<Hellow name='张三' callback={this.callback}></Hellow>)
+//子组件接收
+class Hellow extends Component {
+    this.props.callback(2)
+}
+```
+
+### 6.3兄弟组件传值
+
+- 将兄弟的共享状态放在父组件中使用
