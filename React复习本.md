@@ -338,3 +338,126 @@ class Hellow extends Component {
 
   
 
+### 6.5 props校验(不使用typescript时使用)
+
+1. 安装 prop-types 包
+
+   ```shell
+   npm i prop-types
+   ```
+
+2. 在需要校验的组件中导入
+
+   ```javascript
+   import PropTypes form 'prop-types'
+   ```
+
+3. 使用
+
+   ```javascript
+   //方式一: List是组件名,params是要传递过来的参数名
+   List.propTypes = {
+       params: PropTypes.arry
+   }
+   
+   //方式二: 在类组件中添加静态成员,静态成员可以通过类直接访问,而动态成员需要实例化组件才能访问
+   class List extends Componet {
+       static propTypes = {
+           params: PropTypes.arry
+       }
+   }
+   ```
+
+4. 设置默认值
+
+   ```javascript
+   List.defaultProps = {
+       params: []
+   }
+   
+   //函数组件可以使用参数设置默认值的方式
+   List = ({params = 20}) =>{
+       return <h1> {params} </h1>
+   }
+   ```
+
+   
+
+5. 常用规则
+
+   1. 常见类型: array, bool ,func , number , object , string
+   2. React元素类型: element
+   3. 必填项: isRequired
+   4. 特定结构: shape({})
+
+   **核心代码**
+
+   ```jsx
+   // 常见类型
+   optionalFunc: PropTypes.func,
+   // 必选
+   requiredFunc: PropTypes.func.isRequired, //方法类型并且必传
+   // 特定结构的对象
+   optionalObjectWithShape: PropTypes.shape({  //这个对象中必须有color和fontSize属性
+   	color: PropTypes.string,
+   	fontSize: PropTypes.number
+   })
+   ```
+
+
+## 7. 插槽
+
+`通过props的childer属性来实现插槽`
+
+### 7.1 匿名插槽
+
+```javascript
+//父组件
+class parent extends Component {
+    render(){
+        return <Hellow>我的世界</Hellow>
+    }
+}
+
+//子组件
+class Hellow extends Component {
+    render(){
+        return <h1> {this.props.children} </h1>
+    }
+}
+```
+
+### 7.2 作用域插槽
+
+```javascript
+//父组件
+class parent extends Component {
+    handler = (params) => { console.log(params)}
+    render(){
+        return <Hellow> {this.handler} </Hellow>
+    }
+}
+
+//子组件
+class Hellow extends Component {
+    render(){
+        return <h1> {this.props.children('参数')} </h1>
+    }
+}
+```
+
+## 8. 生命周期钩子函数(函数组件没有生命周期)
+
+| 钩子函数                                           | 触发时机                | 作用                                                         |
+| -------------------------------------------------- | ----------------------- | ------------------------------------------------------------ |
+| constructor                                        | 创建组件时,最先执行     | 1. 初始化state  2. 创建 Ref 3. 使用 bind 解决 this 指向问题等 |
+| render                                             | 每次组件渲染都会执行    | 渲染UI（**注意： 不能调用setState()** ）                     |
+| componentDidMount                                  | 组件挂载(DOM完成渲染)   | 发送网络请求,DOM操作                                         |
+| componentDidUpdate(prevProps, prevState, snapshot) | 组件更新(DOM完成渲染后) | DOM操作，可以获取到更新后的DOM内容，**不要直接调用setState** |
+| componentWillUnmount                               | 组件卸载(从页面消失)    | 执行清理工作（比如：清理定时器等)                            |
+
+### 组件渲染的时机
+
+1. setState() 更新state数据 ,
+2.  forceUpdate() 强制组件更新 , 
+3. 组件收到新的props(父向子传递的属性变化)(实际上只要父组件更新,子组件就会重新渲染[只是走一遍代码,通过diff算法判断要不要更新DOM])
