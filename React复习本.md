@@ -249,7 +249,7 @@ class App extends React.Component {
 函数组件
 
 ```javascript
-// 父组件传递
+// 父组件传递,也可以直接使用{...this.state}传递,react内部会处理成name={this.state.name}
 root.render(<Hellow name='张三' tag={18}></Hellow>)
 //子组件接收
 function Hellow (props){
@@ -331,9 +331,10 @@ class Hellow extends Component {
   ```javascript
   <Hellow>
       <consumer>
-      	{name => <h1>我的名字叫做{name}</h1>}
+        {name => <h1>我的名字叫做{name}</h1>}
       </consumer>
   </Hellow>
   ```
 
   
+
