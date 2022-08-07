@@ -559,6 +559,7 @@ this.setState(
 4. 在 JSX 中展示状态
 5. 在按钮的点击事件中调用修改状态的函数，来更新状态(使用新的状态值`替换`旧值)
 6. 修改状态的时候，一定要**使用新的状态替换旧的状态**
+7. 修改状态的值的类型根据初始值的类型要一致
 
 ```javascript
 // useState hook 的基本使用
@@ -578,3 +579,138 @@ const App = () => {
 export default App
 ```
 
+### 10.2 useState-使用规则
+
+**目标：**能够为函数组件提供多个状态
+
+**内容：**
+
++ 如何为函数组件提供多个状态？
+
+  + 调用 `useState` Hook 多次即可，每调用一次 useState Hook 可以提供一个状态
+  + `useState Hook` 多次调用返回的 [state, setState]，相互之间，互不影响
+
++ useState 等 Hook 的使用规则：
+
+  + **React Hooks 只能直接出现在 函数组件 中**
+  + **React Hooks不能嵌套在 if/for/其他函数 中**
+  + 原理：React 是按照 Hooks 的调用顺序来识别每一个 Hook，如果每次调用的顺序不同，导致 React 无法知道是哪一个 Hook
+
+## 11. useEffect
+
+### 11.1 useEffect-副作用介绍
+
+- 理解：
+  - 副作用是相对于主作用来说的，一个功能（比如，函数）除了主作用，其他的作用就是副作用
+  - 对于 React 组件来说，==**主作用就是根据数据（state/props）渲染 UI**，**除此之外都是副作用（比如，手动修改 DOM）**==
+- 常见的副作用（side effect）：数据（Ajax）请求、手动修改 DOM、localStorage、console.log 操作等
+
+### 11.2 useEffect-基本使用
+
+语法：
+
+- 参数：回调函数（称为 **effect**），就是**在该函数中写副作用代码**
+
+- ==执行时机==：该 effect 会在组件**第一次渲染**以及**每次组件更新**后执行
+
+- 相当于 componentDidMount + componentDidUpdate
+
+```javascript
+import { useEffect } from 'react'
+
+useEffect(function effect() {
+  document.title = `当前已点击 ${count} 次`
+})
+
+useEffect(() => {
+  document.title = `当前已点击 ${count} 次`
+})
+```
+
+### 11.3 useEffect-依赖项
+
+- 默认情况：只要状态发生更新 useEffect 的 effect 回调就会执行
+
+- 性能优化：**跳过不必要的执行，只在 count 变化时，才执行相应的 effect**
+
+- 语法：
+  - 第二个参数：可选，也可以传一个数组，数组中的元素可以成为依赖项（deps : depends , 依赖） 
+  - 该示例中表示：**只有当 count 改变时，才会重新执行该 effect**
+
+```javascript
+ useEffect(() => {
+    document.title = `当前已点击 ${count} 次`
+  }, [count])
+```
+
+### 11.4 useEffect-不要对依赖项撒谎
+
+**目标：**能够理解不正确使用依赖项的后果
+
+**内容：**
+
+- useEffect 回调函数（effect）中用到的数据（比如，count）就是依赖数据，就应该出现在依赖项数组中
+- 如果 useEffect 回调函数中用到了某个数据，但是，没有出现在依赖项数组中，就会导致一些 Bug 出现！
+- 所以，不要对 useEffect 的依赖撒谎 
+
+### 11.5 useEffect-依赖是一个空数组
+
+**目标：**能够设置useEffect的依赖，让组件只有在第一次渲染后会执行
+
+**内容**：
+
+- useEffect 的第二个参数，还可以是一个**空数组（[]）**，表示只在组件第一次渲染后执行 effect
+- ==使用场景==：**1 事件绑定  2 发送请求获取数据 等**
+- 语法：
+  - 该 effect 只会在组件第一次渲染后执行，因此，可以执行像事件绑定等只需要执行一次的操作
+  - 此时，相当于 class 组件的 componentDidMount 钩子函数的作用
+
+### 11.6 useEffect-清理工作
+
+**目标：**能够在组件卸载的时候清除注册的事件
+
+**内容：**
+
+- effect 的**返回值**是可选的，可省略。也可以返回一个**清理函数**，用来执行事件解绑等清理操作
+- ==清理函数的执行时机==：
+  - **清理函数**会在==组件卸载==时以及==下一次副作用回调函数调用的时候==执行，用于清除上一次的副作用。
+  - 如果依赖项为空数组，那么会在组件卸载时会执行。相当于组件的`componetWillUnmount`
+
+### 5.7 useEffect-语法总结 ***
+
+**目标：**能够说出useEffect的 4 种使用使用方式
+
+**内容**：
+
+```js
+// 1
+// 触发时机：1 第一次渲染会执行 2 每次组件重新渲染都会再次执行
+// componentDidMount + ComponentDidUpdate
+useEffect(() => {})
+
+// 2（使用频率最高）
+// 触发时机：只在组件第一次渲染时执行
+// componentDidMount
+useEffect(() => {}, [])
+
+// 3（使用频率最高）
+// 触发时机：1 第一次渲染会执行 2 当 count 变化时会再次执行
+// componentDidMount + componentDidUpdate（判断 count 有没有改变）
+useEffect(() => {}, [count])
+
+// 4
+useEffect(() => {
+  // 返回值函数的执行时机：组件卸载时
+  // 在返回的函数中，清理工作
+  return () => {
+  	// 相当于 componentWillUnmount
+  }
+}, [])
+
+useEffect(() => {
+  
+  // 返回值函数的执行时机：1 组件卸载时 2 count 变化时
+  // 在返回的函数中，清理工作
+  return () => {}
+}, [count])
+```
