@@ -461,3 +461,120 @@ class Hellow extends Component {
 1. setState() 更新state数据 ,
 2.  forceUpdate() 强制组件更新 , 
 3. 组件收到新的props(父向子传递的属性变化)(实际上只要父组件更新,子组件就会重新渲染[只是走一遍代码,通过diff算法判断要不要更新DOM])
+
+## 9. setState进阶
+
+### 11.1 setState更新数据的说明
+
+**内容：**
+
++ setState 方法更新状态是同步的，但是表现为延迟更新状态（==注意==：**非异步更新状态！！！**）
+
++ 延迟更新状态的说明：
+
+  - 调用 setState 时，将要更新的状态对象，放到一个更新队列中暂存起来（没有立即更新）
+
+  - 如果多次调用 setState 更新状态，**状态会进行合并，后面覆盖前面**
+
+  - 等到所有的操作都执行完毕，React 会拿到最终的状态，然后触发组件更新
+
++ 优势：多次调用 setState() ，只会触发一次重新渲染，提升性能
+
+```javascript
+state = { count: 1 }
+
+this.setState({
+	count: this.state.count + 1
+})
+console.log(this.state.count) // 1
+```
+
+### 11.2 setState 进阶语法
+
+**目标：**能够掌握setState箭头函数的语法，解决多次调用依赖的问题
+
+**内容:**
+
++  推荐：使用 `setState((prevState) => {})` 语法
+   +  previous : /*ˈpriːviəs*/ , 以前的
+
++  参数 prevState：表示上一次 `setState` 更新后的状态
+
+```javascript
+this.setState((prevState) => {
+  return {
+    count: prevState.count + 1
+  }
+})
+```
+
+### 11.3. setState-第二个参数 (了解,用得少)
+
+**目标：**能够使用setState的回调函数，操作渲染后的DOM
+
+**内容：**
+
++ 场景：在状态更新（页面完成重新渲染）后立即执行某个操作
++ 语法：`setState(updater[, callback])`
+
+```js
+this.setState(
+	(state) => ({}),
+	() => {console.log('这个回调函数会在状态更新后并且 DOM 更新后执行')}
+)
+```
+
+### 11.4. setState-同步or异步
+
+**目标：**能够说出setState到底是同步的还是异步
+
+**内容：**
+
++ setState本身并不是一个异步方法，其之所以会表现出一种“异步”的形式，是因为react框架本身的一个性能优化机制
++ React会将多个setState的调用合并为一个来执行，也就是说，当执行setState的时候，state中的数据并不会马上更新
++ 情况1: setState如果是在react的生命周期中或者是事件处理函数中，表现出来为：延迟合并更新（“异步更新”）--> 假的异步
++ 情况2: setState如果是在setTimeout/setInterval或者原生事件中，表现出来是：立即更新（“同步更新”）
+
+## 10. Hooks
+
+**内容**：
+
+- `Hooks`：钩子、钓钩、钩住
+- `Hooks` 是 **React v16.8** 中的新增功能 
+- 作用：为**函数组件**提供状态、生命周期等原本 class 组件中提供的 React 功能
+  - 可以理解为通过 Hooks 为函数组件钩入 class 组件的特性
+- 注意：**Hooks 只能在函数组件中使用**，自此，函数组件成为 React 的新宠儿
+
+### 10.1 useState-基本使用
+
+- 参数：**状态初始值**。比如，传入 0 表示该状态的初始值为 0
+
+- 注意：此处的状态可以是任意值（比如，数值、字符串等），而 class 组件中的 state 必须是对象
+
+**步骤**：
+
+1. 导入 `useState` hook
+2. 调用 `useState` 函数，并传入状态的初始值
+3. 从 `useState` 函数的返回值中，拿到状态和修改状态的函数
+4. 在 JSX 中展示状态
+5. 在按钮的点击事件中调用修改状态的函数，来更新状态(使用新的状态值`替换`旧值)
+6. 修改状态的时候，一定要**使用新的状态替换旧的状态**
+
+```javascript
+// useState hook 的基本使用
+import { useState } from 'react'
+
+const App = () => {
+  // 调用 useState hook 创建状态,解构数组,数组第一项是初始值,第二项是修改初始值的方法
+  const [state,setState] = useState(10)
+  return (
+    <div>
+      <h1>计数器：{state}</h1>
+      <button onClick={() => setState(state + 1)}>+1</button>
+    </div>
+  )
+}
+
+export default App
+```
+

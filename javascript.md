@@ -47,7 +47,7 @@ obj['name'];
 ```javascript
 var obj = {};
 obj.name = '我的世界';
-//内置对象也可以添加新属性
+//内置对象也可以添加新属性,这种添加方法只在当前作用域有效,无法继承给子代
 Math.a = 100
 Math.__proto__.a = 100
 ```
@@ -214,8 +214,8 @@ var arr = new Array();
    ```javascript
    typeof arr == 'object';
    //typeof null 结果是 object ，实际这是 typeof 的⼀个bug，null是原始值，⾮引用类型
-  //引⽤类型除了 function 其他的都是object
-  //不能用来检测Array,null
+    //引⽤类型除了 function 其他的都是object
+    //不能用来检测Array,null
   ```
   
 2. instanceof检测数据类型
@@ -226,7 +226,7 @@ var arr = new Array();
    
    //也可以用来判断a是不是在b的原型链上
    a instanceof b
-   ```
+  ```
 
 #### 6.关于对象和数组的浅拷贝和深拷贝
 
