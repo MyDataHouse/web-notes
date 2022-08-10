@@ -311,7 +311,7 @@ class Hellow extends Component {
 - 解构出provider,consumer组件
 
   ```javascript
-  const {provider, consumer} = creatContext()
+  const {provider, consumer} = creatContext('默认值可选类型要和将来传递的值一致')
   ```
 
   
@@ -714,3 +714,148 @@ useEffect(() => {
   return () => {}
 }, [count])
 ```
+
+## 12. useContext 亲戚组件之间的传值
+
+1. 创建一个单独的的context文件导出创建的context对象
+
+   ```javascript
+   import {createContext} from 'react'
+   export const Count = createContext()
+   ```
+
+2. 引入context文件对子组件传值
+
+   ```javascript
+   import {Count} from './cont-Context'
+   <Count.Provider value={cehsi}><Count.Provider>
+   ```
+
+3. 子组件使用值
+
+   ```javascript
+   import {useContext} from 'react'
+   import {count} from '../../cont-Context'
+   const childrden = () => {
+       cosnt cehsi = useContext(count)
+       render(){}
+   }
+   ```
+
+   
+
+## 13. useRef
+
+1. 导入useRef
+
+   ```javascript
+   import {useRef} from 'react'
+   ```
+
+2. 创建ref对象,使用
+
+   ```javascript
+   cosnt inputRef = useRef(null)
+   const children = () => {
+       handler(){
+           inputRef.current.innerHTML
+       }
+       render(){
+           return <h1 ref={inputRef}></h1>
+       }
+   }
+   ```
+
+   
+
+## 14. redux
+
+Redux 是 React 中最常用的**状态管理工具**（状态容器）其他js框架也可以使用
+
+- 与Vue的Vuex是类似的
+- redux : */*ˈriːdʌks*/* , 被带回的 , 复活的 , 网络翻译: 状态管理
+
+**内容：**
+
+为了让**代码各部分职责清晰、明确**，Redux 代码被分为三个核心概念：action/reducer/store
+
+- action -> reducer -> store
+- **action**（动作）：描述要做的事情
+- **reducer**（函数）：更新状态
+  - */*rɪˈdjuːsə(r)*/* , 还原剂
+
+- **store**（仓库）：整合 action 和 reducer
+
+### action
+
+特点：
+
+- **只描述做什么**
+- **action是一个JS 对象，必须带有 `type` 属性**，用于区分动作的类型
+- 根据功能的不同，**可以携带额外的数据**（比如，`payload` 有效载荷，也就是附带的额外的数据），配合该数据来完成相应功能
+
+```javascript
+const action = (payload)=> ({type:'increment', payload})
+```
+
+### reducer
+
+**特点**：
+
+- 函数签名为：`(prevState, action) => newState`
+  - prevState: previous state : 上一个状态
+  - 函数签名  , 就是函数的参数是啥 , 返回值是啥 , 其实可以**理解**为**函数的语法**
+- 接收上一次的状态和 action 作为参数，根据 action 的类型，执行不同操作，最终返回新的状态
+- 注意：**该函数一定要有返回值**，即使状态没有改变也要返回上一次的状态
+- 约定：reducer 是一个**纯函数**，并且不能包含 side effect 副作用(比如，不能修改函数参数、不能修改函数外部数据、不能进行异步操作等)
+- 纯函数：**相同的输入总是得到相同的输出**
+- 对于 reducer 来说，为了保证 reducer 是一个纯函数，需要做到以下不要：
+  1. 不要直接修改参数 state 的值（也就是：不要直接修改当前状态，而是根据当前状态值创建新的状态值）
+  2. 不要使用 Math.random() / new Date() / Date.now() / ajax 请求等不纯的操作
+     - 因为这些函数每次会得到不同的结果
+  3. 不要让 reducer 执行副作用（side effect）
+
+```javascript
+const reducer = (prevState, action)=> {
+    switch (action.type){
+        case 'increment':
+            return prevState + action.payload
+        default :
+            return prevState
+    }
+}
+```
+
+### store
+
+**内容：**
+
+- store：仓库，Redux 的核心，整合 action 和 reducer
+
+- 特点：
+  - **一个应用只有一个 store**
+  - 维护应用的状态，获取状态：`store.getState()`
+  - 发起状态更新时，需要分发 action：`store.dispatch(action)`
+  - 创建 store 时**接收 reducer 作为参数**：`const store = createStore(reducer)`
+- 其他 API，
+  - 订阅(监听)状态变化：`const unSubscribe = store.subscribe(() => {}) `
+    - subscribe : */səbˈskraɪb*/*  , 订阅
+  - 取消订阅状态变化： `unSubscribe()`
+
+```javascript
+import { createStore } from 'redux'
+
+const action = (payload)=> ({type:'increment', payload}) //声明了一个action对象
+const reducer = (prevState = 0, action)=> { //声明了一个改变action对象的纯函数默认值为0
+    switch (action.type){
+        case 'increment':
+            return prevState + action.payload
+        default :
+            return prevState
+    }
+}
+
+const store = createStore(reducer)  //PS: 这一步整合了reducer
+store.dispatch(action(2)) //将要改变的action对象传入store
+```
+
