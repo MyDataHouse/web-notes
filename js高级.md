@@ -467,7 +467,7 @@ console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
 
 `**FileReader**` 对象允许 Web 应用程序异步读取存储在用户计算机上的文件（或原始数据缓冲区）的内容，使用 [`File`](https://developer.mozilla.org/zh-CN/docs/Web/API/File) 或 [`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob) 对象指定要读取的文件或数据。
 
-## [属性](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader#method_overview)
+#### [属性](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader#method_overview)
 
 - [`FileReader.error`](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/error) 只读
 
@@ -506,7 +506,7 @@ console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
 
   
 
-### Worker接口创建多线程不影响gui渲染引擎
+### [Worker](https://developer.mozilla.org/zh-CN/docs/Web/API/Worker)接口创建多线程不影响gui渲染引擎
 
 创建一个专用 Web worker，它只执行 URL 指定的脚本。使用 [Blob URL](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob) 作为参数亦可。
 
@@ -535,4 +535,33 @@ var myWorker = new Worker('worker.js'); //这里的worker.js是文件路径在�
   //在worker.js中
   self.postMessage('abc')
 ```
+
+### Websocket [基本使用](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
+
+1. 创建websocket对象
+
+```javascript
+//参数1: url ：连接的websocket属性
+//参数2：protocol : 可选的，指定连接协议
+var Socket = new WebSocket('ws://echo.websocket.org')
+var Socket = new WebSocket('url,[protocol]')
+```
+
+2. websocket事件
+
+   | 事件    | 事件处理         | 说明                                                         |
+   | ------- | ---------------- | ------------------------------------------------------------ |
+   | open    | Socket.onopen    | 连接时触发                                                   |
+   | message | Socket.onmessage | 客户端接收服务端数据时触发，接收数据通过函数传参的e.data获取 |
+   | error   | Socket.onerror   | 通信发生错误时触发                                           |
+   | close   | Socket.onclose   | 连接关闭时触发发                                             |
+
+3. websocket方法
+
+   | 方法          | 说明             |
+   | ------------- | ---------------- |
+   | Socket.send() | 使用连接发送数据 |
+   | Soket.close() | 关闭连接         |
+
+   
 

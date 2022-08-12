@@ -859,3 +859,136 @@ const store = createStore(reducer)  //PS: 这一步整合了reducer
 store.dispatch(action(2)) //将要改变的action对象传入store
 ```
 
+### React-Redux-基本使用-全局配置
+
+1. 安装 react-redux：`yarn add react-redux`
+2. 从 react-redux 中导入 Provider 组件
+   - react-redux中也有Provider , 其实react-redux也是通过context实现的数据共享
+3. 导入创建好的 redux 仓库
+4. 使用 Provider 包裹整个应用
+5. 将导入的 store 设置为 Provider 的 store 属性值
+
+#### 创建redux文件
+
+```javascript
+import {createStore} from 'redux'
+
+//创建reducer
+const reducer = (state = 0, action) => {
+    switch (action.type){
+        case 'ceshi':
+            return state + 1
+            default ：
+            return state
+    }
+}
+
+//创建store
+const store = createStore(reducer)
+//导出创建好的 store
+export default store
+```
+
+#### 全局配置redux
+
+安装react-redux 包
+
+
+```javascript
+//在src/index.js中
+import ReactDom from 'react-dom/client'
+//2.从 react-redux 中导入 Provider 组件
+import { Provider } from 'react-redux'
+const root = ReactDom.createRoot(document.querySelector('#root'))
+//3. 导入创建好的 redux 仓库
+import store from './store'
+import App from './App'
+
+root.render(
+  //4. 使用 Provider 包裹整个应用
+    // 全局配置 react-redux，配置后，项目中任何一个组件中，
+	// 都可以直接接入 redux 来进行状态管理了
+  <Provider store={store}> //5. 将导入的 store 设置为 Provider 的 store 属性值
+    <App />
+  </Provider>
+)
+```
+
+#### React-Redux-获取状态useSelector
+
+- `useSelector`：获取 Redux 提供的状态数据
+- 参数：selector 函数，用于从 Redux 状态中筛选出需要的状态数据并返回
+- 返回值：筛选出的状态
+
+```javascript
+import { useSelector } from 'react-redux'
+
+// 计数器案例中，Redux 中的状态是数值，所以，可以直接返回 state 本身
+const count = useSelector(state => state)
+
+// 比如，Redux 中的状态是个对象，就可以：
+const list = useSelector(state => state.list)
+
+// 在组件中使用
+const App = () => {
+  const count = useSelector(state => state) //拿到redux中state的默认值
+  
+  return (
+  	<div>
+    	<h1>计数器：{count}</h1>
+      <button>数值增加</button>
+			<button>数值减少</button>
+    </div>
+  )
+}
+```
+
+#### React-Redux-分发动作useDispatch
+
+- `useDispatch`：拿到 dispatch 函数，分发 action，修改 redux 中的状态数据
+- 语法：
+
+```javascript
+import { useDispatch } from 'react-redux'
+
+// 调用 useDispatch hook，拿到 dispatch 函数
+const dispatch = useDispatch()
+
+// 调用 dispatch 传入 action，来分发动作
+dispatch( action )
+```
+
+在子组件中
+
+```javascript
+import { useSelector, useDispatch } from 'react-redux'
+
+// actions：
+// action creator：函数，通过函数来创建 action 对象
+//  1 计数器数值增加，增加多少不确定
+const increment = payload => ({ type: 'increment', payload })
+//  2 计数器数值减少，减少多少不确定
+const decrement = payload => {
+  return { type: 'decrement', payload }
+}
+
+const App = () => {
+  // 调用 useSelector hook 来获取 redux 状态
+  const count = useSelector(state => state)
+  // 导入 dispatch 函数
+  // 此处的 dispatch 函数就相当于 store.dispatch
+  // 所以，要想修改状态，只需要 分发 action 即可
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+      <h1>计数器：{count}</h1>
+      <button onClick={() => dispatch(increment(2))}>数值增加</button>
+      <button onClick={() => dispatch(decrement(5))}>数值减少</button>
+    </div>
+  )
+}
+
+export default App
+```
+
