@@ -190,7 +190,7 @@ var arr = new Array();
 | charCodeAt()                     | 表示给定索引处的 UTF-16 代码单元,UTF-16 编码单元匹配能用一个 UTF-16 编码单元表示的 Unicode 码点 |                                 |
 | codePointAt()                    | 方法返回 一个 Unicode 编码点值的非负整数。                   |                                 |
 | str.concat(str2,str3)            | 连接两个或多个字符串拼接字符等效于+ +                        | 返回新的字符串                  |
-| substr(start,length)             | 从start位置开始，length取的个数                              | 返回新的字符串                  |
+| substr(start,length)             | 从start位置开始，length取的个数，（已弃用）                  | 返回新的字符串                  |
 | slice(start,end)                 | 从start开始截取到end位置,不包括end                           | 返回新的字符串                  |
 | substring(start,end)             | 从start开始截取到end位置,不包括end,不接受负值                | 返回新的字符串                  |
 | replace('被替换的值','替换的值') | 利用循环和indexOf替换想要替换的值                            | 返回新的字符串                  |
@@ -571,13 +571,13 @@ if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
 
 #### 8.元素偏移量 offset
 
-| offset属性     | 作用                                  |
-| ------------ | ----------------------------------- |
-| offsetparent | 返回作为该元素带有定位的父级元素，如果父级元素都没有定位则返回body |
-| offsetTop    | 返回相对于带有定位父元素上方的偏移量                  |
-| offsetLeft   | 返回相对于带有定位父元素左边框的偏移量                 |
-| offsetWidth  | 返回自身包括padding,边框，内容区的宽度，            |
-| offsetHeight | 返回自身包括padding,边框，内容区的高度，            |
+| offset属性   | 作用                                                         |
+| ------------ | ------------------------------------------------------------ |
+| offsetParent | 返回作为该元素带有定位的父级元素，如果父级元素都没有定位则返回body |
+| offsetTop    | 返回相对于带有定位父元素上方的偏移量                         |
+| offsetLeft   | 返回相对于带有定位父元素左边框的偏移量                       |
+| offsetWidth  | 返回自身包括padding,边框，内容区的宽度，                     |
+| offsetHeight | 返回自身包括padding,边框，内容区的高度，                     |
 
 #### 9.元素可视区 client
 
@@ -590,17 +590,17 @@ if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
 
 #### 10.元素滚动 scroll
 
-| scroll属性           | 作用                          |
-| ------------------ | --------------------------- |
-| scrollTop          | 返回被卷曲的上侧距离                  |
-| scrollLeft         | 返回被卷曲的左侧距离                  |
-| scrollWidth        | 返回自身实际宽度，不含边框               |
-| scrollHeight       | 返回自身实际高度，不含边框               |
-| window.pageYOffset | 返回页面的被卷曲的上侧距离H5新增           |
-| window.pageXOffset | 返回页面被卷去的左侧距离H5新增            |
-| scroll(坐标x,坐标y)    | 将元素滚动到指定位置                  |
-| scrollTo(坐标x,坐标Y)  | 将元素滚动到指定位置跟上面一样             |
-| scrollBy(坐标x，坐标Y)  | 每隔一秒使元素从当前的位置向指定位置移动指定的像素位置 |
+| scroll属性             | 作用                                                         |
+| ---------------------- | ------------------------------------------------------------ |
+| scrollTop              | 返回被卷曲的上侧距离，获取或设置一个元素的内容垂直滚动的像素数。 |
+| scrollLeft             | 返回被卷曲的左侧距离                                         |
+| scrollWidth            | 返回自身实际宽度，不含边框                                   |
+| scrollHeight           | 返回自身实际高度，不含边框                                   |
+| window.pageYOffset     | 返回页面的被卷曲的上侧距离H5新增                             |
+| window.pageXOffset     | 返回页面被卷去的左侧距离H5新增                               |
+| scroll(坐标x,坐标y)    | 将元素滚动到指定位置                                         |
+| scrollTo(坐标x,坐标Y)  | 将元素滚动到指定位置跟上面一样                               |
+| scrollBy(坐标x，坐标Y) | 每隔一秒使元素从当前的位置向指定位置移动指定的像素位置       |
 
 ##### 兼容写法
 

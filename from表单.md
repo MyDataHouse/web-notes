@@ -73,3 +73,33 @@ function(){
 1. 表单获取的文件路径在value属性中,想要重复选择,要清空value,触发change事件 
 
 2. 使用window.URL.createObjectURL()来吧对象转换成URL路径
+
+### 上传文件时修改文件名
+
+```javascript
+//假设这就是选择文件后执行的函数
+//由于文件对象的属性是只读的所以只有重新创建文件对象修改名字
+function(e){
+    let file = e.target.files[0];
+ file = new File([file],`123_${file.name}`,{type:file.type, lastModified:file.lastModified})
+}
+```
+
+### 上传文件修改文件编码格式FileReader
+
+```javascript
+//假设这就是选择文件后执行的函数
+//把图片转换欸base64格式
+//上传base64图片使用application/x-www-form-urlencoded 的请求头以字符串为文件主体上传时要处理编码问题
+//转换的base64字符串进行编码，服务器解码  encodeURIComponent()
+//encodeURIComponent() 相比 encodeURL的转义范围更大
+function(e){
+    let file = e.target.files[0];
+    let fileReader = new FileReader()
+    fileReader.readAsDateURL(file)
+    fileReader.onload = ev=>{
+        console.log(ev.target.result)
+    }
+}
+```
+

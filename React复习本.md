@@ -871,10 +871,8 @@ store.dispatch(action(2)) //将要改变的action对象传入store
 #### 创建redux文件
 
 ```javascript
-import {createStore} from 'redux'
-
 //创建reducer
-const reducer = (state = 0, action) => {
+export const reducer = (state = 0, action) => {
     switch (action.type){
         case 'ceshi':
             return state + 1
@@ -883,10 +881,10 @@ const reducer = (state = 0, action) => {
     }
 }
 
-//创建store
-const store = createStore(reducer)
-//导出创建好的 store
-export default store
+//在reducers/index.js中
+import {reducer} from './reducer'
+import {combinReducers} from 'redux'
+export default combinReducers({reducer}) //合并多个reducer
 ```
 
 #### 全局配置redux
