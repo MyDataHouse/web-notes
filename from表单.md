@@ -74,6 +74,15 @@ function(){
 
 2. 使用window.URL.createObjectURL()来吧对象转换成URL路径
 
+### 选取多文件
+
+```java
+// 添加 multiple 属性可以多选文件
+<input type='file' multiple>
+```
+
+
+
 ### 上传文件时修改文件名
 
 ```javascript
@@ -103,3 +112,7 @@ function(e){
 }
 ```
 
+### 拖拽上传文件
+
+1. 使用h5新增的拖拽相关事件，dragenter,dragleave,dragover,drop
+2. 在目标元素中监听到drop事件后事件对象中e.dataTransfer.files 是文件列表

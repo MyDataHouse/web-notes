@@ -990,3 +990,113 @@ const App = () => {
 export default App
 ```
 
+### Redux中间件
+
+默认情况下，Redux 自身只能处理同步数据流。但是在实际项目开发中，状态的更新、获取，通常是使用异步操作来实现。
+
+- 问题：如何在 Redux 中进行异步操作呢? 
+- 回答：通过 Redux 中间件机制来实现
+
+#### 中间件原理
+
+```javascript
+// 简化写法：
+// store 表示：redux 的 store
+// next 表示：下一个中间件，如果只使用一个中间，那么 next 就是 store.dispatch（redux 自己的 dispatch 函数）
+// action 表示：要分发的动作
+const logger = store => next => action => {
+  console.log('prev state:', store.getState()) // 更新前的状态
+  // 记录日志代码
+  console.log('dispatching', action)
+  // 如果只使用了一个中间件：
+  // 那么，next 就表示原始的 dispatch
+  // 也就是：logger中间件包装了 store.dispatch
+  let result = next(action)
+  // 上面 next 代码执行后，redux 状态就已经更新了，所以，再 getState() 拿到的就是更新后的最新状态值
+  // 记录日志代码
+  console.log('next state', store.getState()) // 更新后的状态
+  return result
+}
+
+// 完整写法：
+const logger = store => {
+  return next => {
+    return action => {
+      // 中间件代码写在这个位置：
+    }
+  }
+}
+```
+
+#### redux-thunk中间件
+
+**目标**：能够使用redux-thunk中间件处理异步操作
+
+**内容**：
+
+`redux-thunk` 中间件可以处理`函数形式的 action`。因此，在函数形式的 action 中就可以执行异步操作
+
+语法：
+
+- thunk action 是一个函数
+- 函数包含两个参数：1 dispatch 2 getState
+
+```javascript
+// 函数形式的 action
+ const thunkAction = () => {
+  return (dispatch, getState) => {}
+}
+
+// 解释：
+export const thunkAction = () => {
+  // 注意：此处返回的是一个函数，返回的函数有两个参数：
+	// 第一个参数：dispatch 函数，用来分发 action
+  // 第二个参数：getState 函数，用来获取 redux 状态
+  return (dispatch, getState) => {
+    setTimeout(() => {
+      // 执行异步操作
+      // 在异步操作成功后，可以继续分发对象形式的 action 来更新状态
+    }, 1000)
+  }
+}
+```
+
+原理
+
+```javascript
+function createThunkMiddleware(extraArgument) {
+  // Redux 中间件的写法：const myMiddleware = store => next => action => { /* 此处写 中间件 的代码 */ }
+  return ({ dispatch, getState }) => (next) => (action) => {
+    // redux-thunk 的核心代码：
+    // 判断 action 的类型是不是函数
+    // 如果是函数，就调用该函数（action），并且传入了 dispatch 和 getState
+    if (typeof action === 'function') {
+      return action(dispatch, getState, extraArgument);
+    }
+    // 如果不是函数，就调用下一个中间件（next），将 action 传递过去
+    // 如果没有其他中间件，那么，此处的 next 指的就是：Redux 自己的 dispatch 方法
+    return next(action);
+  };
+}
+
+```
+
+#### @redux-devtools/extension 中间件
+
+**目标**：能够使用chrome开发者工具调试跟踪redux状态
+
+**步骤**：
+
+1. 安装： `yarn add @redux-devtools/extension`
+2. 从该中间件中导入 composeWithDevTools 函数
+3. 调用该函数，将 applyMiddleware() 作为参数传入
+
+```javascript
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from '@redux-devtools/extension'
+import reducers from './reducers'
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
+
+export default store
+```
+
