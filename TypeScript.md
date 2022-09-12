@@ -1609,3 +1609,303 @@ class User implements Member {
 }
 ```
 
+## 泛型
+
+泛型指使用时才定义类型, 即类型可以像参数一样定义, 主要解决类, 接口, 函数的复用性, 让它们可以处理多种类型
+
+### 基本使用
+
+```typescript
+function dump<T>(arg: T): T{
+    return arg
+}
+
+console.log(dump<string>('张三')) //这里也可以不使用<string>它会自动推断
+```
+
+### 类型继承
+
+```typescript
+//因为编译器不知道T上有length方法没有,所以要继承有length方法的类型,或自定义{length: number}
+function getLength<T extends string | any[]>(arg: T): number{
+    return arg.length
+}
+
+console.log(getLength('zhangsan'))
+console.log(getLength(['张三','李四']))
+```
+
+## 装饰器
+
+装饰器 (Decorators) 为我们在类的声名及成员上通过编程语法拓展其功能,装饰器一函数的形式声明
+
+### 装饰器类型
+
+可用装饰器包含以下几种
+
+|     **装饰器**     |  **说明**  |
+| :----------------: | :--------: |
+|   ClassDecorator   |  类装饰器  |
+|  MethodDecorator   | 方法装饰器 |
+| PropertyDecorator  | 属性装饰器 |
+| ParameterDecorator | 参数装饰器 |
+
+### 该方法是实验性功能TS需要开启以下配置
+
+```typescript
+"experimentalDecorators": true,
+"emitDecoratorMetadata": true
+```
+
+### 类装饰器
+
+类装饰器是对类的功能进行扩展
+
+- 首先执行 RoleDecorator 装饰器，然后执行类的构造函数
+- 装饰器会优先执行，这与装饰器与类的顺序无关
+
+#### 装饰器参数
+
+| **参数** | **说明** |
+| -------- | -------- |
+| 参数一   | 构造函数 |
+
+- 普通方法是构造函数的原型对象 Prototype
+- 静态方法是构造函数
+
+#### 使用方法
+
+```typescript
+const MoveDecorator: ClassDecorator = (constructor: Function)=> {
+    constructor.prototype.hd = '张三'
+    constructor.prototype.getPosition = (): {x: number, y: number} =>{
+        return {x: 100,y: 200}
+    }
+}
+
+@MoveDecorator
+class Tank{
+    constructor(){
+        console.log('tank 构造函数')
+    }
+}
+
+const tank = new Tank()
+console.log((<any>tank).getPosition()) //这里直接使用tank会提示错误,使用断言来指定类型
+```
+
+#### 报错时使用给类添加默认属性或断言处理
+
+```typescript
+//添加默认属性
+class Tank(){
+    public hd: string | undefined
+    public getPosition(){}
+    constructor(){
+        concole.log('tank 构造函数')
+    }
+}
+
+//使用断言处理
+const tank = new Tank()
+console.log((tank as any).getPosition())
+console.log((<any>tank).getPosition:())
+```
+
+#### 语法糖
+
+```typescript
+const MoveDecorator: ClassDecorator = (constructor: Function) => {
+    constructor.prototype.hd = '后盾人'
+    constructor.prototype.getPosition = (): { x: number, y: number } => {
+        return { x: 100, y: 100 }
+    }
+}
+
+class Tank {
+    constructor() {
+        console.log('tank 构造函数');
+    }
+}
+
+MoveDecorator(Tank); //这里不适用 @ 符号就是这样注册
+const tank = new Tank()
+console.log(tank.getPosition());
+```
+
+#### 装饰器工厂
+
+又是需要有条件的返回不同的装饰器,这是可以使用装饰器工厂来解决问题
+
+核心理念是使用函数有条件的的返回了不同的定制的装饰器
+
+```typescript
+const MusicDecorator = (type: string): ClassDecorator => {
+    switch (type) {
+        case 'player':
+            return (constructor: Function) => {
+                constructor.prototype.playMusic = (): void => {
+                    console.log(`播放【海阔天空】音乐`);
+                }
+            }
+            break;
+        default:
+            return (constructor: Function) => {
+                constructor.prototype.playMusic = (): void => {
+                    console.log(`播放【喜洋洋】音乐`);
+                }
+            }
+
+    }
+}
+
+@MusicDecorator('tank')
+class Tank {
+    constructor() {
+    }
+}
+const tank = new Tank();
+(<any>tank).playMusic();
+
+@MusicDecorator('player')
+class Player {
+}
+
+const xj: Player = new Player();
+(xj as any).playMusic()
+```
+
+### 方法装饰器
+
+| **参数** | **说明**                                                   |
+| -------- | ---------------------------------------------------------- |
+| 参数一   | 普通方法是构造函数的原型对象 Prototype, 静态方法是构造函数 |
+| 参数二   | 方法名称                                                   |
+| 参数三   | 属性描述,是否可读些,是否可以枚举,携带的方法                |
+
+```typescript
+const ShowDecorator: MethodDecorator = (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor):void => {
+    console.log(target) //对象
+    console.log(propertyKey) //方法名
+    console.log(descriptor.value) //方法实现 .value获取具体的代码实现
+}
+
+class Hd {
+    @ShowDecorator
+    show(){
+        console.log('show method')
+    }
+}
+const instance = new Hd()
+instance.show()
+```
+
+### 属性装饰器
+
+首先介绍装饰器函数参数说明
+
+| **参数** | **说明**                                                   |
+| -------- | ---------------------------------------------------------- |
+| 参数一   | 普通方法是构造函数的原型对象 Prototype, 静态方法是构造函数 |
+| 参数二   | 属性名称                                                   |
+
+#### 基本使用
+
+```typescript
+const PropDecorator: PropertyDecorator = (target: Object, propertyKey: string | symbol): void =>{
+    console.log(propertyKey)
+}
+
+class Hd {
+    @PropDecorator
+    public name: string | undefined = '张三'
+    show(){
+        console.log(33)
+    }
+}
+```
+
+#### 访问器
+
+下面是定义属性 name 的值转换为小写的装饰器
+
+```typescript
+const PropDecorator: PropertyDecorator = (target: Object, propertyKey: string | symbol): void => {
+  let value: string
+  const getter = () => {
+    return value
+  }
+
+  const setter = (v: string) => {
+    value = v.toLowerCase()
+  }
+
+  Object.defineProperty(target, propertyKey, {
+    set: setter,
+    get: getter
+  })
+}
+
+class Hd {
+  @PropDecorator
+  public name: string | undefined = '张三'
+  show() {
+    console.log(33)
+  }
+}
+
+const ceshi = new Hd()
+ceshi.name = 'WODDSDJFDS'
+console.log(ceshi.name) // woddsdjfds
+
+```
+
+### 参数装饰器
+
+可以对方法的参数设置装饰器,参数装饰器的返回值被忽略
+
+**参数装饰器比方法装饰器优先执行**	
+
+| **参数** | **说明**                                                   |
+| -------- | ---------------------------------------------------------- |
+| 参数一   | 普通方法是构造函数的原型对象 Prototype, 静态方法是构造函数 |
+| 参数二   | 方法名称                                                   |
+| 参数三   | 参数所在索引位置                                           |
+
+```typescript
+// 利用参数装饰器判断所需要的参数是否为空,只能判断一个参数,由此案例得知多个参数装饰器是从右往左执行的
+import 'reflect-metadata' //这个包要安装
+const RequiredDecorator: ParameterDecorator = (target: Object, propertyKey: string | symbol, parameterIndex: number): void => {
+  let requiredParams: number[] = []
+  requiredParams.push(parameterIndex)
+
+  Reflect.defineMetadata('required', requiredParams, target, propertyKey)
+}
+const validateDecorator: MethodDecorator = (
+  target: Object,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor
+): void => {
+  const method = descriptor.value
+  descriptor.value = function () {
+    const requiredParams: number[] = Reflect.getMetadata('required', target, propertyKey) || []
+    requiredParams.forEach(index => {
+      if (index > arguments.length || arguments[index] === undefined) {
+        throw new Error('请传入参数')
+      }
+      return method.apply(this, arguments)
+    })
+  }
+}
+
+class User {
+  @validateDecorator
+  find(name: string, @RequiredDecorator id: number) {
+    console.log(id)
+  }
+}
+
+new User().find('测试', 34)
+
+```
+
