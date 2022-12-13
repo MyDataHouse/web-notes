@@ -88,3 +88,382 @@
 		2. Proxy()
 			1. 不需要遍历，只需要递归
 			2. vue3已经做好了
+
+#### 4.2 生命周期函数
+
+1. 在vue3中setup组合式API中没有，`beforeCreate` `created`生命周期
+2. 在vue3中使用生命周期函数要加`on`例如`onMounted`
+3. 在同时使用选项式API和组合式API时，**组合式API优先级高**
+4. 在vue3中使用新API要从vue中引入，每个文件都要引
+5. 为了防止麻烦，有npm包来自动引入 unplugin-auto-import -D,需要额外配置
+
+#### 4.3 响应式工具
+
+1. `toRefs`使用它，组件可以**解构**/展开返回的对象而不会失去响应性：
+
+	```javascript
+	import {toRefs} from 'vue'
+	setup(){
+	    //当使用{name,year}来结构数据，时数据会失去响应
+	    let obj = {
+	        name:'ax',
+	        year:12
+	    }
+	    return {...toRefs(obj)} //更解构效果一样，当时具备响应式
+	}
+	```
+
+	
+
+#### 4.5 计算属性`computed`
+
+1. 跟vue2使用没什么区别，需要单独引入computed
+
+	```javascript
+	import {computed, ref} from 'vue'
+	setup(){
+	    let year = ref(13)
+	    let yearChange = computed(
+	    	 ()=>{
+	        return year++
+	   	 })
+	    return {
+	        yeaer, yearChange
+	    }
+	}
+	```
+	
+	```javascript
+	import {computed, ref} from 'vue'
+	setup(){
+	    let year = ref(13)
+	    let yearChange = computed(
+	    	get(){
+	        return year++
+	        }
+			set(val){
+	            console.log(val)
+	        }
+	    )
+	    return { year, yearChange }
+	}
+	```
+	
+	
+
+#### 4.6  监听属性watch
+
+1. vue3中监听属性
+
+	```javascript
+	import { watch, ref } from 'vue'
+	setup(){
+	    let msg = ref('数据')
+	    watch(msg,(newvlaue,oldvalue)=>{
+	        console.log(newvalue, oldvalue)
+	    },{
+	        immediate:true,
+	        deep:true
+	    })
+	    return {
+	        msg
+	    }
+	}
+	```
+	
+2. 监听多个值
+
+	```javascript
+	import { watch, ref } from 'vue'
+	setup(){
+	    let msg = ref('数据')
+	    let str = ref('测试')
+	    // 第一个参数是监听多个数据的数组
+	    watch([msg, str],(newvlaue,oldvalue)=>{
+	        console.log(newvalue, oldvalue)
+	    },{
+	        immediate:true,
+	        deep:true
+	    })
+	    return {
+	        msg,
+	        str
+	    }
+	}
+	```
+
+	
+
+3. 监听‘对象’中某个对象
+
+	```javascript
+	import { watch, reactive } from 'vue'
+	setup(){
+	    let msg = reactive({
+	        name:'西汉三',
+	        arr:['1','2']
+	    })
+	    watch( ()=>msg,(newvlaue,oldvalue)=>{
+	        console.log(newvalue, oldvalue)
+	    })
+	    return {
+	        msg
+	    }
+	}
+	```
+
+	
+
+4. 立即执行监听函数
+
+	```vue
+	watchEffect(
+	()=>{
+	    console.log(msg.value)
+	}
+	)
+	//监听所有数据只要有数据改变就执行，并对数据进行响应
+	```
+
+	
+
+#### 4.7 路由
+
+this.$router 改变 useRouter
+
+this.$route 改变 useRoute
+
+#### 4.8 组件传值-父传子
+
+- 父组件
+
+	```javascript
+	<template>
+	    <div>
+	     <List :msg='msg'></List>
+	    </div>
+	</template>
+	<script setup>
+	    import {ref} from 'vue'
+	    import List from './components/List.vue'
+		let msg = ref('数据')
+	<script>
+	```
+
+- 子组件
+
+	```javascript
+	<template>
+	    <div>
+	     {{msg}}
+	    </div>
+	</template>
+	<script setup>
+	    import {defineProps} from 'vue'
+	    defineProps({
+	        msg:{
+	            type:String,
+	            default:'111'
+	        }
+	    })
+	<script>
+	 //=============================================================
+	       方式二
+	<template>
+	    <div>
+	     {{msg}}
+	    </div>
+	</template>
+	<script type='text/javascript'>
+	    export default {
+		props:['msg'],
+	        setup(props){
+	       let msg = props.msg
+	       return (msg)
+	    }
+	}
+	<script>
+	//=================================================================
+	    方式三
+	<template>
+	    <div>
+	     {{msg}}
+	    </div>
+	</template>
+	<script type='text/javascript'>
+	    import { toRefs } from 'vue'
+	    export default {
+		props:['msg'],
+	        setup(props){
+	       let {msg} = toRefs(props)
+	       return (msg)
+	    }
+	}
+	<script>
+	```
+
+	
+
+#### 4.9 组件传值-子传父
+
+- 父组件
+
+	```javascript
+	<template>
+	    <div>
+	     <List :msg='msg'></List>
+	    </div>
+	</template>
+	<script setup>
+	    import {ref} from 'vue'
+	    import List from './components/List.vue'
+		let msg = ref('数据')
+	    const fn = (n)==>{ msg = n }
+	<script>
+	```
+
+	
+
+- 子组件
+
+	```javascript
+	<template>
+	    <div @click='change('we')'>
+	    </div>
+	</template>
+	<script setup>
+	    import {defineEmits} from 'vue'
+		const emit = defintEmits(['fn'])
+	    const change = (n)=> emit('fn',n)
+	<script>
+	//=============================================================
+	        方式二
+	<template>
+	    <div @click='change('we')'>
+	    </div>
+	</template>
+	<script type='text/javascript'>
+	    export default {
+			emits: ['fn'],
+	    	setup(props,{emit}){
+	            const change = (n)=>{emit('fn',n)}
+	        }
+	}
+	<script>
+	```
+
+
+#### 4.10 Teleport 传送
+
+- 将指定内容传送到指定位置
+- <teleport to = '#container'></teltport>
+- <teleport to = '.main'></teltport>
+- <teleport to = 'body'></teltport>
+
+#### 4.11 动态组件
+
+```javascript
+<template>
+    <component :is='com.com'></component>
+</template>
+<script setup>
+  import { ref } from 'vue'
+	import A from './components/A.vue'
+	let com = ref({
+        // 要使用markRaw包裹起来对组件本身不进行响应
+        com: markRaw(A)
+    })
+<script>
+```
+
+#### 4.12 异步组件
+
+vueusea 包
+
+- 使用场景一
+
+  - 组件按需引入：当用户访问到了组件再去加载该组件
+
+  	```javascript
+  	<template>
+  	    <div ref='target'>
+  	        <C v-if='targetIsVisible'></C>
+  	    </div>
+  	</template>
+  	<script setup>
+  	    import { useIntersectionObserver } from '@vueuse/core'
+  		import {defineAsyncComponent} from 'vue'
+  		const C = defineAsyncComponent(()=>{
+  	        import('../components/C.vue')
+  	    })
+  	    const target = ref()
+  		const targetIsVisible= ref(false)
+  	    const { stop } = useIntersectionObserver(
+  	    target,
+  	        ([{isIntersecting}])=>{
+  	            if(isIntetsecting){
+  	                targetIsVisible.value = isIntersecting
+  	            }
+  	        }   
+  	    )
+  	</script>
+  	    
+  	    //==============================================================
+  	    //下面的是使用suspense，获取加载状态的使用
+  	    <template>
+  	    <div ref='target'>
+  	        <Suspense v-if='targetIsVisible'>
+  	        	<template #default>
+  	                <C></C>
+  	            </template>
+  				<template #fallbackk>
+  	                加载中...
+  	            </template>
+  	        </Suspense>
+  	    </div>
+  	</template>
+  	<script setup>
+  	    import { useIntersectionObserver } from '@vueuse/core'
+  		import {defineAsyncComponent} from 'vue'
+  		const C = defineAsyncComponent(()=>{
+  	        import('../components/C.vue')
+  	    })
+  	    const target = ref()
+  		const targetIsVisible= ref(false)
+  	    const { stop } = useIntersectionObserver(
+  	    target,
+  	        ([{isIntersecting}])=>{
+  	            if(isIntetsecting){
+  	                targetIsVisible.value = isIntersecting
+  	            }
+  	        }   
+  	    )
+  	</script>
+  	```
+  	
+  	
+
+- 使用场景二， 异步组件中，还有异步操作
+
+	npm run build 打包完成后，异步组件有单独的js文件，是从主体js分包出来的
+
+	```javascript
+	<template>
+	    <Suspense>
+	    	<template #default>
+	            <A></A>
+	        </template>
+			<template #fallback>
+	            加载中...
+	        </template>
+	    </Suspense>
+	</template>
+	<script setup>
+	    import {defineAsyncComponent} from 'vue'
+		cosnt A = defineAsyncComponent(()=>{ 
+	    import('../components/A.vue')
+	    })
+	</script>
+	```
+
+	

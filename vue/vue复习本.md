@@ -18,7 +18,7 @@ arr&&arr.length
 | v-for="(item,index) in arr" ;key =index                  |          | 循环数组或对象,根据数据创建标签       |
 | :class="{类名 : bool}"或:class=[active === 1?"类名":" "] |          | 动态添加属性名                        |
 | :style="{css属性名 : 值}"                                |          | 动态修改样式                          |
-| v-slot:'slotname'                                        | :        | 具名插槽                              |
+| v-slot:'slotname',   #slotname                           | :        | 具名插槽                              |
 | v-clack                                                  |          | 解决插值表达式闪烁问题                |
 |                                                          |          |                                       |
 |                                                          |          |                                       |
@@ -336,6 +336,34 @@ export default {
     <mark>activated – 激活时触发</mark>
    
     <mark>deactivated – 失去激活状态触发</mark>
+
+### 异步组件
+
+将组件代码单独进行分包，优化页面加载速度
+
+- 组件声明方式
+
+	- 方法一 ：结合webpack
+
+	```javascript
+	//全局
+	Vue.component('component-name', function (resolve) {
+	  resolve({
+	   require(['@/components/a'],resolve)
+	  })
+	})
+	    
+	//局部
+	 new Vue({
+	   components: {
+	        'component-name':function(resolve) {
+	           require(['./my-component'], resolve)
+	        }
+	   }
+	
+	```
+
+	
 
 ### 组件插槽
 
