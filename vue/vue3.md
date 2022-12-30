@@ -467,3 +467,48 @@ vueusea 包
 	```
 
 	
+
+#### 4.13 mixin
+
+```javascript
+//定义混入代码
+import {ref} from 'vue'
+export const ceshi = function(){
+    let a = ref(3)
+    let b = ref(false)
+    let bBtn=()=>{
+        a.value += 1
+        b.value = true
+        setTimeout(()=>{
+            b.value = false
+        },2000)
+    }
+    return {
+        a,b,bBtn
+    }
+}
+
+//使用混入代码
+<script setup>
+    import { ceshi } from '../mxions/mixin.js'
+	let { a, b, bBtn } = ceshi()
+</script>
+```
+
+#### 4.14 provide inject
+
+```javascript
+//在父组件中
+<script setup>
+import { ref } from 'vue'   
+let num = ref(100)
+provide('dataName', num)
+</script>
+
+//在子组件中
+<script setup>
+import { inject } from 'vue'
+const num = inject('dataName')
+</script>
+```
+
