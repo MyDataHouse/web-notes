@@ -288,6 +288,20 @@ $ git merge origin/dev [示例2：合并远端分支origin/dev到当前分支]
 $ git merge FETCH_HEAD [将拉取下来最新内容合并到当前分支]
 ```
 
+3.详细使用
+
+```shell
+$ git fetch origin master #抓取远程仓库
+$ git diff FETCH_HEAD #对比
+$ git merge FETCH_HEAD
+```
+
+
+
+## 31.工作区暂存
+
+```
+
 ## 31.暂时保存工作区文件,防止被带到其他分支
 
 ```shell
@@ -296,7 +310,7 @@ git stash save "修改的信息"
 #查看保存的文件列表
 git stash list
 #回到保存的文件版本
-git stash apply stash@{0}
+git stash apply 0
 #删除指定id 的stash
 git stash drop [stash_id]
 #：删除所有缓存的 stash。
@@ -357,3 +371,13 @@ git checkout 分支名 && ls
 //查看当前分支的内容
 ls
 ```
+
+### 35. windows系统下文件[大小写重命名](https://blog.csdn.net/notechsolution/article/details/86261793)
+
+```shell
+# 使用重命名的方式来解决
+# 想进入目录，demo是要改变的文件名 demo1是改变的名字
+# 然后再改一次，改回自己想要的
+git mv demo demo1
+```
+
