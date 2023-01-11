@@ -158,3 +158,21 @@ const CopyClearBr={
 export default CopyClearBr
 ```
 
+### 6. 设置数组对象响应式问题
+
+```vue
+<script>
+    data(){
+    return {
+        arr:[]
+    }
+    methods(){
+        setarr(){
+            this.arr = ['1','2'] //这么设置数组中的数据不是响应式 $set也没用
+            this.arr = [{value:'1'},{value:'2'}] //这样设置就没问题
+        }
+    }
+}
+</script>
+```
+

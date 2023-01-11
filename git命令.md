@@ -372,12 +372,19 @@ git checkout 分支名 && ls
 ls
 ```
 
-### 35. windows系统下文件[大小写重命名](https://blog.csdn.net/notechsolution/article/details/86261793)
+## 35. windows系统下文件[大小写重命名](https://blog.csdn.net/notechsolution/article/details/86261793)
 
 ```shell
 # 使用重命名的方式来解决
 # 想进入目录，demo是要改变的文件名 demo1是改变的名字
 # 然后再改一次，改回自己想要的
 git mv demo demo1
+```
+
+### 36. 查看本地分支与远程分支的关联配置
+
+```shell
+$ git branch -vv #查看本地分支与远程分支的关联简略信息
+$ git remote show origin #查看本地分只与远程分支关联的详细信息
 ```
 
