@@ -300,7 +300,7 @@ $ git merge FETCH_HEAD
 
 ## 31.工作区暂存
 
-```
+```shell
 
 ## 31.暂时保存工作区文件,防止被带到其他分支
 
@@ -315,6 +315,12 @@ git stash apply 0
 git stash drop [stash_id]
 #：删除所有缓存的 stash。
 git stash clear 
+
+#保存工作区文件，工作区不清空,为当前修改或删除的文件创建一个自定义的栈并返回一个ID，此时并未真正存储到栈里
+git stash create '信息'
+#将 create 方法里返回的ID放到 store 后面，此时在栈里真正创建了一个记录，但当前修改或删除的文件并未从工作区移除
+git stash store ID
+
 ```
 
 ## 32.git代理设置
