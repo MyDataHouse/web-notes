@@ -274,11 +274,10 @@ Object.keys(directives).forEach(item => {
   
    ```javascript
    //字符组件中添加如下代码
-   provide: function () {
-     return {
+   provide:  {
        getMap: this.getMap
      }
-   }
+   
    //在子组件间中添加如下代码,校验方法跟props相同
    inject: ['getMap']
    ```

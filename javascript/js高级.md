@@ -579,3 +579,24 @@ var Socket = new WebSocket('url,[protocol]')
 
    
 
+### [atob()](https://developer.mozilla.org/zh-CN/docs/Web/API/atob)
+
+**`atob()`**对经过base-64编码的字符串进行解析解析为二进制数据
+
+```javascript
+let encodedData = window.btoa("Hello, world"); // 编码
+let decodedData = window.atob(encodedData);    // 解码
+
+// 此处的 base64Str 是一个 Base64 编码的字符串
+const base64Str = '...';
+// 将 Base64 字符串解码为二进制数据
+const binaryStr = atob(base64Str);
+// 创建 Uint8Array 数组
+const array = new Uint8Array(binaryStr.length);
+for (let i = 0; i < binaryStr.length; i++) {
+  array[i] = binaryStr.charCodeAt(i);
+}
+// 创建 Blob 对象
+const blob = new Blob([array], { type: 'image/octet-stream' });
+```
+
