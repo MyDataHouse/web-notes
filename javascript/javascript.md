@@ -393,13 +393,14 @@ var arr = new Array();
   
    ```javascript
    ul.removeChild(ul.children[0])//只能删除子节点
-   ```
-
+   li.remove() //删除节点
+  ```
+  
 4. 克隆节点
   
    ```javascript
    ul.cloneNode(true);//参数为true表示深拷贝，不写或false表示浅拷贝
-   ```
+  ```
 
 #### 6.事件操作
 
@@ -412,8 +413,12 @@ var arr = new Array();
    ul.addEventListener('click',function(){})
    //IE特有6 7 8支持
    ul.attachEvent('onclick',function(){})
-   ```
-
+   //自定义事件注册,detail传递的参数， bubbles是否冒泡，cancelable是否可以取消默认事件,composed事件能否从shadowDom传递到一般DOM
+    var event = new CustomEvent('build', { detail: {name:'张三'}， bubbles:true, cancelable: true });
+    //触发自定义事件
+    document.dispatchEvent(event)
+  ```
+  
 2. 事件删除方式
   
    ```javascript
@@ -431,7 +436,7 @@ var arr = new Array();
        ul.detachEvent('onclick',fn1);
    }
    ul.attachEvent('onclick',fn1);
-   ```
+  ```
 
 #### 7.事件对象
 
