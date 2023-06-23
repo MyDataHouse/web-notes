@@ -195,6 +195,7 @@ div{
 
 ```css
 animation: name duration timing-function delay iteration-count direction fill-mode;
+					//名称 持续时间  速度曲线          延迟时间 循环次数        循环方向   动画结束状态
 ```
 
 ### 2.1.4. 多个动画写法
