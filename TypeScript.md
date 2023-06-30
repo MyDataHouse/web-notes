@@ -899,7 +899,7 @@ class User extends Hd {
 
 子类更改父类方法或属性的访问修饰符有些限制的
 
-- 父类的 private 不允许只类修改
+- 父类的 private 不允许子类修改
 - 父类的 protected 子类可以修改为 protected 或 public
 - 父类的 public 子类只能设置为 public
 
