@@ -387,8 +387,19 @@ var arr = new Array();
    ul.appendChild(li);//给ul末尾添加了节点
    ul.insertBefore(li,ul.children[0])//第一个参数是要添加的节点
    //第二个是从什么位置开始
-   ```
-
+   //方法将一个给定的元素节点插入到相对于被调用的元素的给定的一个位
+  element.insertAdjacentElement(position,element)
+  //方法将指定的文本解析为html元素插入指定位置
+  element.insertAdjacentHTML(position, text)
+  //将一个给定的文本节点插入在相对于被调用的元素给定的位置。
+  element.insertAdjacentText(position, element)
+  //position beforebegin 在该元素本身的前面。
+  //afterbegin 在该元素当中，在该元素第一个子孩子前面
+  //beforeend 该元素当中，在该元素最后一个子孩子后面
+  //afterend 在该元素本身的后面
+  
+  ```
+  
 3. 删除节点
   
    ```javascript
