@@ -6,7 +6,8 @@
 //1.字面量
 var obj = {};
 //2.用new创建
-var obj = new object();//var obj = new object({name:'值');
+var obj = new Object();//var obj = new object({name:'值');
+var obj = new Object(null) //可以创建一个干净的对象,没有原型链
 obj.name = '值';
 //3.构造函数创建对象
 function 构造函数名 (形参1,形参2){
@@ -199,22 +200,23 @@ var arr = new Array();
 
 1. <mark>字符串的不可变</mark>，指的是虽然看上去改变了内容但其实时地址变了，内存中开辟了新的空间
 
-| 方法名                           | 说明                                                         | 返回值                          |
-| -------------------------------- | ------------------------------------------------------------ | ------------------------------- |
-| indexOf('值'，fromIndex)         | indexOf() 方法返回调用它的 String 对象中第一次出现的指定值的索引，从 fromIndex 处进行搜索。如果未找到该值，则返回 -1 | 如果找到值返回下标,找不到返回-1 |
-| lastIndexOf('值'，fromIndex)     | 跟indexOf相反从后往前找，找到该值最后出现的位置              | 找到返回下标，找不到返回-1      |
-| charAt(索引号)                   | 根据索引号返回该位置的值，用来遍历字符串                     | 返回指定位置的值                |
-| charCodeAt()                     | 表示给定索引处的 UTF-16 代码单元,UTF-16 编码单元匹配能用一个 UTF-16 编码单元表示的 Unicode 码点 |                                 |
-| codePointAt()                    | 方法返回 一个 Unicode 编码点值的非负整数。                   |                                 |
-| str.concat(str2,str3)            | 连接两个或多个字符串拼接字符等效于+ +                        | 返回新的字符串                  |
-| substr(start,length)             | 从start位置开始，length取的个数，（已弃用）                  | 返回新的字符串                  |
-| slice(start,end)                 | 从start开始截取到end位置,不包括end                           | 返回新的字符串                  |
-| substring(start,end)             | 从start开始截取到end位置,不包括end,不接受负值                | 返回新的字符串                  |
-| replace('被替换的值','替换的值') | 利用循环和indexOf替换想要替换的值                            | 返回新的字符串                  |
-| split(’分割字符‘)                | 把字符串以分割字符为准转化为数组                             | 返回数组                        |
-| str.toUpperCase()                | 把字符串转换为大写字母                                       | 返回新字符串                    |
-| str.toLowerCase()                | 把字符串转换为小写字母                                       | 返回新字符串                    |
-| str.match()                      | 查找指定字符,也可使用正则表达式全局查找,返回查找到的字符     | 返回查找到的字符                |
+| 方法名                           | 说明                                                         | 返回值                                                       |
+| -------------------------------- | ------------------------------------------------------------ | :----------------------------------------------------------- |
+| indexOf('值'，fromIndex)         | indexOf() 方法返回调用它的 String 对象中第一次出现的指定值的索引，从 fromIndex 处进行搜索。如果未找到该值，则返回 -1 | 如果找到值返回下标,找不到返回-1                              |
+| lastIndexOf('值'，fromIndex)     | 跟indexOf相反从后往前找，找到该值最后出现的位置              | 找到返回下标，找不到返回-1                                   |
+| charAt(索引号)                   | 根据索引号返回该位置的值，用来遍历字符串                     | 返回指定位置的值                                             |
+| charCodeAt()                     | 表示给定索引处的 UTF-16 代码单元,UTF-16 编码单元匹配能用一个 UTF-16 编码单元表示的 Unicode 码点 |                                                              |
+| codePointAt()                    | 方法返回 一个 Unicode 编码点值的非负整数。                   |                                                              |
+| str.concat(str2,str3)            | 连接两个或多个字符串拼接字符等效于+ +                        | 返回新的字符串                                               |
+| substr(start,length)             | 从start位置开始，length取的个数，（已弃用）                  | 返回新的字符串                                               |
+| slice(start,end)                 | 从start开始截取到end位置,不包括end                           | 返回新的字符串                                               |
+| substring(start,end)             | 从start开始截取到end位置,不包括end,不接受负值                | 返回新的字符串                                               |
+| replace('被替换的值','替换的值') | 利用循环和indexOf替换想要替换的值                            | 返回新的字符串                                               |
+| split(’分割字符‘)                | 把字符串以分割字符为准转化为数组                             | 返回数组                                                     |
+| str.toUpperCase()                | 把字符串转换为大写字母                                       | 返回新字符串                                                 |
+| str.toLowerCase()                | 把字符串转换为小写字母                                       | 返回新字符串                                                 |
+| str.match()                      | 查找指定字符,也可使用正则表达式全局查找,返回查找到的字符     | 返回查找到的字符                                             |
+| localeCompare()                  | 配合sort方法可以实现本地文字排序arr.sort(function(a,b){return a.localeCompare(b,'pinyin')}) | 方法返回一个数字，表示参考字符串在排序顺序中是在给定字符串之前、之后还是与之相同 |
 
 #### ES6新增方法
 
@@ -388,16 +390,16 @@ var arr = new Array();
    ul.insertBefore(li,ul.children[0])//第一个参数是要添加的节点
    //第二个是从什么位置开始
    //方法将一个给定的元素节点插入到相对于被调用的元素的给定的一个位
-  element.insertAdjacentElement(position,element)
-  //方法将指定的文本解析为html元素插入指定位置
-  element.insertAdjacentHTML(position, text)
-  //将一个给定的文本节点插入在相对于被调用的元素给定的位置。
-  element.insertAdjacentText(position, element)
-  //position beforebegin 在该元素本身的前面。
-  //afterbegin 在该元素当中，在该元素第一个子孩子前面
-  //beforeend 该元素当中，在该元素最后一个子孩子后面
-  //afterend 在该元素本身的后面
-  
+    element.insertAdjacentElement(position,element)
+    //方法将指定的文本解析为html元素插入指定位置
+    element.insertAdjacentHTML(position, text)
+    //将一个给定的文本节点插入在相对于被调用的元素给定的位置。
+    element.insertAdjacentText(position, element)
+    //position beforebegin 在该元素本身的前面。
+    //afterbegin 在该元素当中，在该元素第一个子孩子前面
+    //beforeend 该元素当中，在该元素最后一个子孩子后面
+    //afterend 在该元素本身的后面
+
   ```
   
 3. 删除节点
@@ -406,12 +408,12 @@ var arr = new Array();
    ul.removeChild(ul.children[0])//只能删除子节点
    li.remove() //删除节点
   ```
-  
+
 4. 克隆节点
   
    ```javascript
    ul.cloneNode(true);//参数为true表示深拷贝，不写或false表示浅拷贝
-  ```
+  ```javascript
 
 #### 6.事件操作
 
@@ -429,7 +431,7 @@ var arr = new Array();
     //触发自定义事件
     document.dispatchEvent(event)
   ```
-  
+
 2. 事件删除方式
   
    ```javascript
@@ -465,7 +467,7 @@ var arr = new Array();
        console.log(e.target);
    
    }
-   ```
+  ```
 
 2. 事件对象的属性和方法
   
@@ -601,6 +603,16 @@ if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
 | back()      | 可以后退功能                      |
 | forward()   | 前进功能                        |
 | go(参数)      | 参数如果为 1 是前进一个页面，是 -1 后退一个页面 |
+
+#### 获取设备像素比 window.devicePixelRatio
+
+设备像素比是指 逻辑像素和物理像素的比值
+
+#### document.body、document.documentElement和window.screen的宽高区别
+
+- document.body -- body标签的宽高
+- document.documentElement -- 网页可视区域的宽高(**不包括滚动条**)
+- window.screen -- 屏幕的宽高
 
 #### 8.元素偏移量 offset
 
