@@ -42,3 +42,11 @@ export function formatDate(numb, format) {
 
 
 
+### 随机生成 颜色
+
+```javascript
+function randomColor(){
+    return '#'+ Math.floor(Math.random() * 16777216).toString(16).padEnd(6,'f')
+}
+```
+

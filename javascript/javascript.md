@@ -214,9 +214,14 @@ var arr = new Array();
 | replace('被替换的值','替换的值') | 利用循环和indexOf替换想要替换的值                            | 返回新的字符串                                               |
 | split(’分割字符‘)                | 把字符串以分割字符为准转化为数组                             | 返回数组                                                     |
 | str.toUpperCase()                | 把字符串转换为大写字母                                       | 返回新字符串                                                 |
+| str.toLocaleUpperCase()          | 根据语言环境转换大写                                         | 返回新字符串                                                 |
 | str.toLowerCase()                | 把字符串转换为小写字母                                       | 返回新字符串                                                 |
+| str.toLocaleLowerCase()          | 根据语言环境转换小写                                         | 返回新字符串                                                 |
 | str.match()                      | 查找指定字符,也可使用正则表达式全局查找,返回查找到的字符     | 返回查找到的字符                                             |
+| str.search()                     | 字符串与正则表达式匹配。                                     | 找到返回下标，找不到返回-1                                   |
 | localeCompare()                  | 配合sort方法可以实现本地文字排序arr.sort(function(a,b){return a.localeCompare(b,'pinyin')}) | 方法返回一个数字，表示参考字符串在排序顺序中是在给定字符串之前、之后还是与之相同 |
+| str.padEnd(5, 'd')               | 方法会用一个字符串填充当前字符串,从当前字符串的末尾（右侧）开始填充。 | 返回填充后达到指定长度的字符串                               |
+| str.padStart(5,'d')              | 方法会用一个字符串填充当前字符串,从当前字符串的左侧开始填充。 | 返回填充后达到指定长度的字符串                               |
 
 #### ES6新增方法
 
