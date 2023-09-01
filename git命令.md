@@ -394,3 +394,14 @@ $ git branch -vv #查看本地分支与远程分支的关联简略信息
 $ git remote show origin #查看本地分只与远程分支关联的详细信息
 ```
 
+### 37.git管理大型文件，二进制文件，视频，图片等
+
+```shell
+#接管public文件夹下所有文件
+git lfs track "public/*"
+#接管所有png文件
+git lfs track "*.png"
+#确认git lfs已经开启
+git lfs install
+```
+
