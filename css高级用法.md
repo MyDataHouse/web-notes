@@ -20,6 +20,26 @@ will-change: revert;
 will-change: margin, visibility, opacity
 ```
 
-# clip-path 元素裁剪
+#### clip-path 元素裁剪
 
 属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏
+
+### content-visibility 渲染性能提升
+
+content-visibility是CSS新增的属性，主要用来提高页面渲染性能，它可以控制一个元素是否渲染其内容，并且允许浏览器跳过这些元素的布局与渲染。
+
+- `visible：`默认值，没有效果。元素的内容被正常布局和呈现。
+- `hidden：`元素跳过它的内容。跳过的内容不能被用户代理功能访问，例如在页面中查找、标签顺序导航等，也不能被选择或聚焦。这类似于给内容设置display: none。
+- `auto：`该元素打开布局包含、样式包含和绘制包含。如果该元素与用户不相关，它也会跳过其内容。与 hidden 不同，跳过的内容必须仍可正常用于用户代理功能，例如在页面中查找、tab 顺序导航等，并且必须正常可聚焦和可选择。
+
+### **contain-intrinsic-size** 指定元素大小(和上面的属性搭配使用)
+
+使用contain-intrinsic-size来指定的元素自然大小，确保我们未渲染子元素的 div 仍然占据空间，同时也保留延迟渲染的好处。
+
+```css
+.card_item {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+```
+
