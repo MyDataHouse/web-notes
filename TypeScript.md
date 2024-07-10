@@ -1676,11 +1676,19 @@ console.log(getLength(['张三','李四']))
 #### 使用方法
 
 ```typescript
+//拓展原有类
 const MoveDecorator: ClassDecorator = (constructor: Function)=> {
     constructor.prototype.hd = '张三'
     constructor.prototype.getPosition = (): {x: number, y: number} =>{
         return {x: 100,y: 200}
     }
+  return class extends constructor {
+    name = '史蒂夫'
+     constructor(...args:any[]){
+      super(...args)
+    	console.log(args)
+   }
+  }
 }
 
 @MoveDecorator
@@ -1787,7 +1795,7 @@ const xj: Player = new Player();
 const ShowDecorator: MethodDecorator = (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor):void => {
     console.log(target) //对象
     console.log(propertyKey) //方法名
-    console.log(descriptor.value) //方法实现 .value获取具体的代码实现
+    console.log(descriptor.value) //方法实现 .value获取具体的代码实现可以修改代码具体实现
 }
 
 class Hd {
