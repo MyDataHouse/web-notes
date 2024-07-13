@@ -1639,16 +1639,18 @@ console.log(getLength(['张三','李四']))
 
 装饰器 (Decorators) 为我们在类的声名及成员上通过编程语法拓展其功能,装饰器一函数的形式声明
 
+完整的装饰器功能配合 `reflect-metadata` 以实现依赖收集注入功能
+
 ### 装饰器类型
 
 可用装饰器包含以下几种
 
-|     **装饰器**     |  **说明**  |
-| :----------------: | :--------: |
-|   ClassDecorator   |  类装饰器  |
-|  MethodDecorator   | 方法装饰器 |
-| PropertyDecorator  | 属性装饰器 |
-| ParameterDecorator | 参数装饰器 |
+|     **装饰器**     |  **说明**  | 默认收集元数据                                  |
+| :----------------: | :--------: | ----------------------------------------------- |
+|   ClassDecorator   |  类装饰器  | design:paramtypes                               |
+|  MethodDecorator   | 方法装饰器 | design:paramtypes design:returntype design:type |
+| PropertyDecorator  | 属性装饰器 | design:type                                     |
+| ParameterDecorator | 参数装饰器 |                                                 |
 
 ### 该方法是实验性功能TS需要开启以下配置
 
@@ -1656,6 +1658,13 @@ console.log(getLength(['张三','李四']))
 "experimentalDecorators": true,
 "emitDecoratorMetadata": true
 ```
+
+### 执行顺序
+
+洋葱模型
+
+- 不同类型装饰器 从上到下，参数优先，类在最后
+- 一个地方同时使用多个装饰器 工厂函数从上到下，装饰器从下到上
 
 ### 类装饰器
 
