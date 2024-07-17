@@ -1,4 +1,4 @@
-## TypeScript特点
+## TypeScript 特点
 
 - typescript 会在编译时对代码进行严格的静态类型检查，可以在编码阶段就发现问题，而不是在上线运行时才发现
 - typeScript 语法遵循 ES 规范，更细速度快，不断支持最新的 ECMAScript 新特性，如装饰器、public/private 修饰符
@@ -6,9 +6,9 @@
 - typescript 可以为 IDE 提供更好的代码补全、接口提示、跳转到定义
 - 还有重要一点是众多科技公司已经采用 typeScript 进行开发，也是前端工程师需要掌握的就业技能
 
-## 项目安装TS
+## 项目安装 TS
 
-1. 安装typescript
+1. 安装 typescript
 
    ```shell
    npm install -D typescript
@@ -22,7 +22,7 @@
 
    
 
-## 编译TS
+## 编译 TS
 
 我们使用 tsc 命令可以将 ts 文件编译为 js 文件，如果在编译过程中有 ts 错误将在命令行报出
 
@@ -84,7 +84,7 @@ const user: {
 | :----------- | ------------------------------------------------------------ |
 | 基本数据类型 | let hd : string = 'wode'                                     |
 | 数组类型     | let arr : (string \| number)[] = ['wode',12]                 |
-| 对象类型     | let obj : {name : string, age : number, open?: boolen} = {name:'ceshi',age:12} |
+| 对象类型     | let obj : {name : string, age : number, open?: boolen} = {name:'ceshi', age: 12} |
 
 ## 配置文件
 
@@ -108,8 +108,8 @@ tsc -w
 
 |       配置       | 说明                                                   |
 | :--------------: | ------------------------------------------------------ |
-|  nolmplicitAny   | 禁止使用隐含的any类型, 如函数参数没有设置具体类型      |
-| strictNullChecks | 开启时不允许将null, undefined 赋值给其他类型比如字符串 |
+|  nolmplicitAny   | 禁止使用隐含的 any 类型, 如函数参数没有设置具体类型      |
+| strictNullChecks | 开启时不允许将 null, undefined 赋值给其他类型比如字符串 |
 |      target      | 转换成 JS 的版本                                       |
 |      strict      | 是否严格模式执行                                       |
 |      module      | 使用的模块系统                                         |
@@ -120,17 +120,17 @@ tsc -w
 
 | 数据类型                                                     | 写法                                             |
 | ------------------------------------------------------------ | ------------------------------------------------ |
-| 字符串                                                       | let hd:string = 'ceshi'                          |
-| 数值                                                         | let hd:number = 100                              |
-| 布尔                                                         | let hd:boolean = true                            |
-| 数组                                                         | let hd:string[] = ['ceshi']                      |
-| 元组 (明确数组每个成员值类型的数组为元组)                    | let hd :[string, number, boolean]                |
-| 对象                                                         | let hd:object                                    |
-| any(设置为any等于使用纯js开发)                               | let hd:any                                       |
-| unknown(跟any的区别会进行TS检查, 使用 as 类型断言来明确类型) | let hd:unknown                                   |
-| void(void类型的值为 null 或 undefined,常用于对函数返回值类型的定义, 严格模式（tsconfig.json 配置中关闭`strict`）时，void 值只能是 undefined) | const a = (a : string):void =>{}                 |
-| never (never没有任何子类型,所以任何类型都不可以赋值给never, 函数抛出异常或无限循环时返回值是 never) | function hd(): never {throw new Error('出错了')} |
-| union 联合类型十多个类型的组合,使用 \| 进行连接类似javascript 中的 \|\| | let hd:string \| number = 'ceshi'                |
+| 字符串                                                       | let hd: string = 'ceshi'                          |
+| 数值                                                         | let hd: number = 100                              |
+| 布尔                                                         | let hd: boolean = true                            |
+| 数组                                                         | let hd: string [] = ['ceshi']                      |
+| 元组 (明确数组每个成员值类型的数组为元组)                    | let hd : [string, number, boolean]                |
+| 对象                                                         | let hd: object                                    |
+| any(设置为 any 等于使用纯 js 开发)                               | let hd: any                                       |
+| unknown(跟 any 的区别会进行 TS 检查, 使用 as 类型断言来明确类型) | let hd: unknown                                   |
+| void(void 类型的值为 null 或 undefined, 常用于对函数返回值类型的定义, 严格模式（tsconfig.json 配置中关闭 `strict`）时，void 值只能是 undefined) | const a = (a : string): void =>{}                 |
+| never (never 没有任何子类型, 所以任何类型都不可以赋值给 never, 函数抛出异常或无限循环时返回值是 never) | function hd(): never {throw new Error('出错了')} |
+| union 联合类型十多个类型的组合, 使用 \| 进行连接类似 javascript 中的 \|\| | let hd: string \| number = 'ceshi'                |
 
 ### 对象
 
@@ -153,7 +153,7 @@ let hd:{name: string,year:number}
 hd={name:'后盾人',year:2010}
 ```
 
-属性后面跟上`?` 用来指定 url 为可选值，这样的属性是非必填项
+属性后面跟上 `?` 用来指定 url 为可选值，这样的属性是非必填项
 
 ```javascript
 let hd:{name: string,year:number,url?:string}
@@ -390,7 +390,7 @@ getId('后盾人');
 
 ## 断言使用
 
-### Enums枚举
+### Enums 枚举
 
 - 不设置值时，值以 0 开始递增
 
@@ -474,13 +474,13 @@ let xj = 'houdunren' //let xj: string
 
 #### const
 
-`const`断言告诉编译器为表达式推断出它能推断出的最窄或最特定的类型，而不是宽泛的类型
+`const` 断言告诉编译器为表达式推断出它能推断出的最窄或最特定的类型，而不是宽泛的类型
 
 - 字符串、布尔类型转换为具体值
 - 对象转换为只读属性
 - 数组转换成为只读元组
 
-下面限定 user 类型为最窄类型`houdunren.com`
+下面限定 user 类型为最窄类型 `houdunren.com`
 
 ```typescript
 let user = '后盾人' as const
@@ -724,7 +724,7 @@ console.log(div.id);
 
 ### 断言处理
 
-使用`as` 将类型声明为 `HTMLAnchorElement` 则 TS 会将其按 a 链接类型处理
+使用 `as` 将类型声明为 `HTMLAnchorElement` 则 TS 会将其按 a 链接类型处理
 
 - 现在所有的提示将是 a 链接属性或方法
 
@@ -773,7 +773,7 @@ bt.addEventListener('click', (e: Event) => {
 
 ### 类的定义
 
-使用TS约束属性并实例化对象
+使用 TS 约束属性并实例化对象
 
 ```typescript
 class User {
@@ -1313,7 +1313,7 @@ play.move()
 下面是用 UserInterface 接口约束函数的参数与返回值
 
 - 会根据溃口规范提示代码提示
-- 严格约束参数类型,维护代码安全
+- 严格约束参数类型, 维护代码安全
 
 ###### 函数参数
 
@@ -1365,7 +1365,7 @@ const hd = new User({name:'张三', age: 12})
 console.log(hd)
 ```
 
-使用 interface 可以优化代码,同时有良好的代码提示
+使用 interface 可以优化代码, 同时有良好的代码提示
 
 ```typescript
 interface UserInterface {
@@ -1470,7 +1470,7 @@ wepay(100)
 
 ##### 类型别名
 
-type可以为 number, string, boolean, object 等基本类型定义别名,比如下列的IsAdmin
+type 可以为 number, string, boolean, object 等基本类型定义别名, 比如下列的 IsAdmin
 
 ```typescript
 //基本类型别名
@@ -1637,7 +1637,7 @@ console.log(getLength(['张三','李四']))
 
 ## 装饰器
 
-装饰器 (Decorators) 为我们在类的声名及成员上通过编程语法拓展其功能,装饰器一函数的形式声明
+装饰器 (Decorators) 为我们在类的声名及成员上通过编程语法拓展其功能, 装饰器一函数的形式声明
 
 完整的装饰器功能配合 `reflect-metadata` 以实现依赖收集注入功能
 
@@ -1649,12 +1649,12 @@ console.log(getLength(['张三','李四']))
 
 |     **装饰器**     |  **说明**  | 默认收集元数据                                  |
 | :----------------: | :--------: | ----------------------------------------------- |
-|   ClassDecorator   |  类装饰器  | design:paramtypes                               |
-|  MethodDecorator   | 方法装饰器 | design:paramtypes design:returntype design:type |
-| PropertyDecorator  | 属性装饰器 | design:type                                     |
+|   ClassDecorator   |  类装饰器  | design: paramtypes                               |
+|  MethodDecorator   | 方法装饰器 | design: paramtypes design: returntype design: type |
+| PropertyDecorator  | 属性装饰器 | design: type                                     |
 | ParameterDecorator | 参数装饰器 |                                                 |
 
-### 该方法是实验性功能TS需要开启以下配置
+### 该方法是实验性功能 TS 需要开启以下配置
 
 ```typescript
 "experimentalDecorators": true,
@@ -1754,7 +1754,7 @@ console.log(tank.getPosition());
 
 #### 装饰器工厂
 
-又是需要有条件的返回不同的装饰器,这是可以使用装饰器工厂来解决问题
+又是需要有条件的返回不同的装饰器, 这是可以使用装饰器工厂来解决问题
 
 核心理念是使用函数有条件的的返回了不同的定制的装饰器
 
@@ -1800,7 +1800,7 @@ const xj: Player = new Player();
 | -------- | ---------------------------------------------------------- |
 | 参数一   | 普通方法是构造函数的原型对象 Prototype, 静态方法是构造函数 |
 | 参数二   | 方法名称                                                   |
-| 参数三   | 属性描述,是否可读些,是否可以枚举,携带的方法                |
+| 参数三   | 属性描述, 是否可读些, 是否可以枚举, 携带的方法                |
 
 ```typescript
 const ShowDecorator: MethodDecorator = (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor):void => {
@@ -1881,7 +1881,7 @@ console.log(ceshi.name) // woddsdjfds
 
 ### 参数装饰器
 
-可以对方法的参数设置装饰器,参数装饰器的返回值被忽略
+可以对方法的参数设置装饰器, 参数装饰器的返回值被忽略
 
 **参数装饰器比方法装饰器优先执行**	
 
