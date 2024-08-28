@@ -512,3 +512,10 @@ const num = inject('dataName')
 </script>
 ```
 
+# vite 自带html环境变量替换
+
+```html
+<h1>Vite is running in %MODE%</h1>
+<p>Using data from %VITE_API_URL%</p>
+```
+

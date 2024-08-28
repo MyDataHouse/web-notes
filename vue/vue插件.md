@@ -1,4 +1,4 @@
-### vue-print-nb 处理打印
+## vue-print-nb 处理打印
 
 1. 安装
 
@@ -28,7 +28,7 @@
 
    
 
-### vue-i18n 多语言处理
+## vue-i18n 多语言处理
 
 1. 安装
 
@@ -104,4 +104,21 @@
    ```
 
    
+
+## vite ejs模板插件
+
+```typescript
+import { createHtmlPlugin } from 'vite-plugin-html'; //ejs模板
+// vite 插件使用
+    plugins: [ createHtmlPlugin({
+        inject: {
+          data: {
+            BASE_URL,
+            CSP
+          }
+        }
+      })],
+// html
+<meta property="og:image" content="<%- BASE_URL %>icon.png" />
+```
 
