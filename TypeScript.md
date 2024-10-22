@@ -1649,9 +1649,9 @@ console.log(getLength(['张三','李四']))
 
 |     **装饰器**     |  **说明**  | 默认收集元数据                                  |
 | :----------------: | :--------: | ----------------------------------------------- |
-|   ClassDecorator   |  类装饰器  | design:paramtypes                               |
-|  MethodDecorator   | 方法装饰器 | design:paramtypes design:returntype design:type |
-| PropertyDecorator  | 属性装饰器 | design:type                                     |
+|   ClassDecorator   |  类装饰器  | design: paramtypes                               |
+|  MethodDecorator   | 方法装饰器 | design: paramtypes design: returntype design: type |
+| PropertyDecorator  | 属性装饰器 | design: type                                     |
 | ParameterDecorator | 参数装饰器 |                                                 |
 
 ### 该方法是实验性功能 TS 需要开启以下配置
