@@ -22,7 +22,7 @@ function 函数名(形参1,形参2){
 var obj = 函数名(实参1,实参2);
 ```
 
-2.通过for in 来遍历对象
+2.通过 for in 来遍历对象
 
 ```javascript
 //for in 在高级浏览器中屏蔽了对象原型中的属性,方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性（也就是，是否有指定的键）用来区别继承的属性和自身的属性
@@ -84,11 +84,11 @@ Math.__proto__.a = 100
      } //能进入 for in 循环的表示有属性 ,属性设置不可枚举时没用
      ```
 
-   - 使用lodash _.isEmpty()方法
+   - 使用 lodash _.isEmpty()方法
 
 7. 冻结对象
 
-   **`Object.freeze()`** 方法可以**冻结**一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值。此外，冻结一个对象后该对象的原型也不能被修改。`freeze()` 返回和传入的参数相同的对象。
+   **`Object.freeze()`** 方法可以 **冻结** 一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值。此外，冻结一个对象后该对象的原型也不能被修改。`freeze()` 返回和传入的参数相同的对象。
 
    ```javascript
    const obj = {
@@ -103,9 +103,9 @@ Math.__proto__.a = 100
 
 ### 内置对象方法：
 
-#### 1. Math对象
+#### 1. Math 对象
 
-    `Math`对象不是构造函数`Math`对象的所有属性与方法都是静态的。引用圆周率的写法是 `Math.PI`，调用正余弦函数的写法是 `Math.sin(x)`，`x` 是要传入的参数。`Math` 的常量是使用 JavaScript 中的全精度浮点数来定义的。
+    `Math` 对象不是构造函数 `Math` 对象的所有属性与方法都是静态的。引用圆周率的写法是 `Math.PI`，调用正余弦函数的写法是 `Math.sin(x)`，`x` 是要传入的参数。`Math` 的常量是使用 JavaScript 中的全精度浮点数来定义的。
 
 | 属性、方法名                | 功能                                                 |
 | --------------------- |:-------------------------------------------------- |
@@ -116,11 +116,11 @@ Math.__proto__.a = 100
 | Math.abs()            | 绝对值                                                |
 | Math.max()/Math.min() | 求最大和最小值                                            |
 | Math.random()         | 获取范围在[0,1)内的随机值                                    |
-| toFixed(保留的位数)        | 保留小数点后面几位,四舍六入五考虑，五后非零就进一，五后为零看奇偶，五前为偶应舍去，五前为奇要进一。 |
+| toFixed(保留的位数)        | 保留小数点后面几位, 四舍六入五考虑，五后非零就进一，五后为零看奇偶，五前为偶应舍去，五前为奇要进一。 |
 
 #### 2.日期对象
 
-    Date对象是一个构造函数，需要通过new实列化后使用
+    Date 对象是一个构造函数，需要通过 new 实列化后使用
 
 ```javascript
 var date = new Date();//获取的是1970年到现在的毫秒数
@@ -132,11 +132,11 @@ var year = date.getFullYear();//获取当年
 | ------------- | --------------- |:------------------ |
 | getFullYear() | 获取当年            | dobj.getFullYear() |
 | getMonth()    | 获取当月(0-11)      | dobj.getMonth()    |
-| getDate()     | 获取当天日期          | dobj,getDate()     |
-| getDay()      | 获取星期几(周日0到周六6)  | dobj.getDay()      |
-| getHours()    | 获取当前小时          | dobj,getHours()    |
+| getDate()     | 获取当天日期          | dobj, getDate()     |
+| getDay()      | 获取星期几(周日 0 到周六 6)  | dobj.getDay()      |
+| getHours()    | 获取当前小时          | dobj, getHours()    |
 | getMinutes()  | 获取当前几分钟         | dobj.getMinutes()  |
-| getSeconds()  | 获取当前秒数          | dobj,getSeconds()  |
+| getSeconds()  | 获取当前秒数          | dobj, getSeconds()  |
 | Date.now()    | 获取格林威治时间到当前的毫秒数 | var a = Date.now() |
 
 #### 3.数组对象
@@ -157,30 +157,30 @@ var arr = new Array();
   
    | 方法名                       | 说明                                                         | 返回值                               |
    | ---------------------------- | ------------------------------------------------------------ | ------------------------------------ |
-   | push(参数1，参数2)           | 从末尾添加一个或多个元素，修改原数组                         | 返回新数组的长度                     |
+   | push(参数 1，参数 2)           | 从末尾添加一个或多个元素，修改原数组                         | 返回新数组的长度                     |
    | pop()                        | 从末尾删除一个元素，数组长度减一，修改原数组                 | 返回删除元素的值                     |
-   | unshift(参数1，参数2)        | 从开头添加一个或多个元素，修改原数组                         | 返回新数组的长度                     |
+   | unshift(参数 1，参数 2)        | 从开头添加一个或多个元素，修改原数组                         | 返回新数组的长度                     |
    | shift()                      | 从开头删除一个元素，数组长度减一，修改原数组                 | 返回删除的元素                       |
-   | arr.**concat**(数组1，数组2) | 连接两个或多个数组，不影响原数组                             | 返回一个新数组                       |
-   | slice()                      | 数组截取slice(start,[end]);start的值表示从数组中的哪个位置开始可以为负值，负值表示倒数，end值可选表示到数组的哪个位置停止截取不会取到end | 返回被截取的新数组                   |
-   | splice()                     | 数组删除splice(第几个开始，要删几个数，要添加的元素);要删几个数可以为负数表示倒数，如果负值超过了数组本身的长度则归0，要删除的数如果超出了数组本身的大小会把数组清空。 | 返回被删除或新增的数组，会改变原数组 |
+   | arr.**concat**(数组 1，数组 2) | 连接两个或多个数组，不影响原数组                             | 返回一个新数组                       |
+   | slice()                      | 数组截取 slice(start, [end]); start 的值表示从数组中的哪个位置开始可以为负值，负值表示倒数，end 值可选表示到数组的哪个位置停止截取不会取到 end | 返回被截取的新数组                   |
+   | splice()                     | 数组删除 splice(第几个开始，要删几个数，要添加的元素); 要删几个数可以为负数表示倒数，如果负值超过了数组本身的长度则归 0，要删除的数如果超出了数组本身的大小会把数组清空。 | 返回被删除或新增的数组，会改变原数组 |
    | arr.toString()               | 把数组转化为字符串，逗号分割每一项。不影响原数组             | 返回一个字符串，                     |
    | join('分隔符');              | 以分隔符为准分割每一项，转化为字符串，不影响原数组           | 返回一个字符串                       |
    | reverse()                    | 颠倒数组中元素的顺序，改变原来的数组                         | 返回新数组                           |
    | sort()                       | 对数组的元素进行排序，改变原数组; 也可传入一个函数进行手动控制升序降序, | 返回新数组                           |
-   | sort((a,b)=>{ a - b})        | a - b是升序,b - a 是降序 可以通过a. b.根据对象中的某个值进行排序 |                                      |
+   | sort((a, b)=>{ a - b})        | a - b 是升序, b - a 是降序 可以通过 a. b.根据对象中的某个值进行排序 |                                      |
    
-   ES6新增方法
+   ES6 新增方法
    
    | 方法名                         | 说明                                                         | 返回值                                      |
    | ------------------------------ | ------------------------------------------------------------ | ------------------------------------------- |
-   | Array.from(objarr,function)    | 把伪数组转换为真数组                                         | 返回新数组                                  |
-   | find(item => item == b)        | 查找满足条件的第一个值                                       | 返回符合条件的第一个值，不满足返回undefined |
+   | Array.from(objarr, function)    | 把伪数组转换为真数组                                         | 返回新数组                                  |
+   | find(item => item == b)        | 查找满足条件的第一个值                                       | 返回符合条件的第一个值，不满足返回 undefined |
    | findIndex(item => item == b)   | 查找满足条件的第一个值的下标                                 | 返回符合条件的第一个值的下标，不满足返回-1  |
-   | includes()                     | 查找满足条件的值                                             | 满足返回true,不满足返回false                |
-   | reduce()                       | 重复执行函数并返回每次计算的值,通常用于计算数组,对象的总值   | 每次返回计算后的值,再次计算,                |
-   | every()                        | 查找数组中不符合条件的直接返回false                          | 不符合条件返回false符合条件返回true         |
-   | flat(深度数字)\|flat(Infinity) | 按照指定深度遍历数组，将多维数组按指定深度展开, Infinity表示自动展开 | 返回遍历的结果                              |
+   | includes()                     | 查找满足条件的值                                             | 满足返回 true, 不满足返回 false                |
+   | reduce()                       | 重复执行函数并返回每次计算的值, 通常用于计算数组, 对象的总值   | 每次返回计算后的值, 再次计算,                |
+   | every()                        | 查找数组中不符合条件的直接返回 false                          | 不符合条件返回 false 符合条件返回 true         |
+   | flat(深度数字)\|flat(Infinity) | 按照指定深度遍历数组，将多维数组按指定深度展开, Infinity 表示自动展开 | 返回遍历的结果                              |
    | fill(value, start, end)        | fill() 方法用于将一个固定值替换数组的元素。                  | 填充改变原数组                              |
    
    3. 遍历数组的方法
@@ -194,46 +194,46 @@ var arr = new Array();
    }
    ```
    
-   item代表当前数组的值，index为下标，arr数组对象
+   item 代表当前数组的值，index 为下标，arr 数组对象
 
 #### 4.字符串对象
 
-1. <mark>字符串的不可变</mark>，指的是虽然看上去改变了内容但其实时地址变了，内存中开辟了新的空间
+1. <mark> 字符串的不可变 </mark>，指的是虽然看上去改变了内容但其实时地址变了，内存中开辟了新的空间
 
 | 方法名                           | 说明                                                         | 返回值                                                       |
 | -------------------------------- | ------------------------------------------------------------ | :----------------------------------------------------------- |
-| indexOf('值'，fromIndex)         | indexOf() 方法返回调用它的 String 对象中第一次出现的指定值的索引，从 fromIndex 处进行搜索。如果未找到该值，则返回 -1 | 如果找到值返回下标,找不到返回-1                              |
-| lastIndexOf('值'，fromIndex)     | 跟indexOf相反从后往前找，找到该值最后出现的位置              | 找到返回下标，找不到返回-1                                   |
+| indexOf('值'，fromIndex)         | indexOf() 方法返回调用它的 String 对象中第一次出现的指定值的索引，从 fromIndex 处进行搜索。如果未找到该值，则返回 -1 | 如果找到值返回下标, 找不到返回-1                              |
+| lastIndexOf('值'，fromIndex)     | 跟 indexOf 相反从后往前找，找到该值最后出现的位置              | 找到返回下标，找不到返回-1                                   |
 | charAt(索引号)                   | 根据索引号返回该位置的值，用来遍历字符串                     | 返回指定位置的值                                             |
-| charCodeAt()                     | 表示给定索引处的 UTF-16 代码单元,UTF-16 编码单元匹配能用一个 UTF-16 编码单元表示的 Unicode 码点 |                                                              |
+| charCodeAt()                     | 表示给定索引处的 UTF-16 代码单元, UTF-16 编码单元匹配能用一个 UTF-16 编码单元表示的 Unicode 码点 |                                                              |
 | codePointAt()                    | 方法返回 一个 Unicode 编码点值的非负整数。                   |                                                              |
-| str.concat(str2,str3)            | 连接两个或多个字符串拼接字符等效于+ +                        | 返回新的字符串                                               |
-| substr(start,length)             | 从start位置开始，length取的个数，（已弃用）                  | 返回新的字符串                                               |
-| slice(start,end)                 | 从start开始截取到end位置,不包括end                           | 返回新的字符串                                               |
-| substring(start,end)             | 从start开始截取到end位置,不包括end,不接受负值                | 返回新的字符串                                               |
-| replace('被替换的值','替换的值') | 利用循环和indexOf替换想要替换的值                            | 返回新的字符串                                               |
+| str.concat(str2, str3)            | 连接两个或多个字符串拼接字符等效于+ +                        | 返回新的字符串                                               |
+| substr(start, length)             | 从 start 位置开始，length 取的个数，（已弃用）                  | 返回新的字符串                                               |
+| slice(start, end)                 | 从 start 开始截取到 end 位置, 不包括 end                           | 返回新的字符串                                               |
+| substring(start, end)             | 从 start 开始截取到 end 位置, 不包括 end, 不接受负值                | 返回新的字符串                                               |
+| replace('被替换的值','替换的值') | 利用循环和 indexOf 替换想要替换的值                            | 返回新的字符串                                               |
 | split(’分割字符‘)                | 把字符串以分割字符为准转化为数组                             | 返回数组                                                     |
 | str.toUpperCase()                | 把字符串转换为大写字母                                       | 返回新字符串                                                 |
 | str.toLocaleUpperCase()          | 根据语言环境转换大写                                         | 返回新字符串                                                 |
 | str.toLowerCase()                | 把字符串转换为小写字母                                       | 返回新字符串                                                 |
 | str.toLocaleLowerCase()          | 根据语言环境转换小写                                         | 返回新字符串                                                 |
-| str.match()                      | 查找指定字符,也可使用正则表达式全局查找,返回查找到的字符     | 返回查找到的字符                                             |
+| str.match()                      | 查找指定字符, 也可使用正则表达式全局查找, 返回查找到的字符     | 返回查找到的字符                                             |
 | str.search()                     | 字符串与正则表达式匹配。                                     | 找到返回下标，找不到返回-1                                   |
-| localeCompare()                  | 配合sort方法可以实现本地文字排序arr.sort(function(a,b){return a.localeCompare(b,'pinyin')}) | 方法返回一个数字，表示参考字符串在排序顺序中是在给定字符串之前、之后还是与之相同 |
-| str.padEnd(5, 'd')               | 方法会用一个字符串填充当前字符串,从当前字符串的末尾（右侧）开始填充。 | 返回填充后达到指定长度的字符串                               |
-| str.padStart(5,'d')              | 方法会用一个字符串填充当前字符串,从当前字符串的左侧开始填充。 | 返回填充后达到指定长度的字符串                               |
+| localeCompare()                  | 配合 sort 方法可以实现本地文字排序 arr.sort(function(a, b){return a.localeCompare(b,'pinyin')}) | 方法返回一个数字，表示参考字符串在排序顺序中是在给定字符串之前、之后还是与之相同 |
+| str.padEnd(5, 'd')               | 方法会用一个字符串填充当前字符串, 从当前字符串的末尾（右侧）开始填充。 | 返回填充后达到指定长度的字符串                               |
+| str.padStart(5,'d')              | 方法会用一个字符串填充当前字符串, 从当前字符串的左侧开始填充。 | 返回填充后达到指定长度的字符串                               |
 
-#### ES6新增方法
+#### ES6 新增方法
 
 | 方法名          | 说明            | 返回值        |
 | ------------ | ------------- | ---------- |
-| startsWith() | 字符串开头有没有指定的字符 | true,false |
-| endsWith()   | 字符串结尾有没有指定的字符 | true,false |
+| startsWith() | 字符串开头有没有指定的字符 | true, false |
+| endsWith()   | 字符串结尾有没有指定的字符 | true, false |
 | repeat()     | 将字符串重复的次数     | 返回新字符串     |
 
 #### 5.检测数据类型
 
-1. typeof检测数据类型
+1. typeof 检测数据类型
   
    ```javascript
    typeof arr == 'object';
@@ -242,7 +242,7 @@ var arr = new Array();
     //不能用来检测Array,null
   ```
   
-2. instanceof检测数据类型
+2. instanceof 检测数据类型
   
    ```javascript
    arr instanceof Array;//true
@@ -254,9 +254,9 @@ var arr = new Array();
 
 #### 6.关于对象和数组的浅拷贝和深拷贝
 
-- 浅拷贝只复制原数组或对象在栈中的指针,指向同一个堆内存
+- 浅拷贝只复制原数组或对象在栈中的指针, 指向同一个堆内存
 
-- 浅拷贝的对象修改数据会互相影响,深拷贝不会
+- 浅拷贝的对象修改数据会互相影响, 深拷贝不会
 
   ```javascript
   //浅拷贝
@@ -271,7 +271,7 @@ var arr = new Array();
 
   
 
-### API易忘点
+### API 易忘点
 
 #### 1.常见鼠标事件
 
@@ -291,13 +291,13 @@ var arr = new Array();
 | oncontextmenu | 控制右键菜单      |
 | onselectstart | 控制选中文字      |
 
-#### 2.操作class属性
+#### 2.操作 class 属性
 
-1. 通过.style更改元素行内样式
+1. 通过.style 更改元素行内样式
 
-2. 通过.className完全覆盖原有的class名称
+2. 通过.className 完全覆盖原有的 class 名称
 
-3. 通过.classList方法添加删除替换类名
+3. 通过.classList 方法添加删除替换类名
   
    ```javascript
    ul.classList.add('class');//添加类名
@@ -316,7 +316,7 @@ var arr = new Array();
    ul.setAttribute('data-index',1)//前面为属性，后面为属性值
    ```
 
-2. 获得属性（与i可以获得内置属性）
+2. 获得属性（与 i 可以获得内置属性）
   
    ```javascript
    ul.getAttribute('data-index');
@@ -353,8 +353,8 @@ var arr = new Array();
    | -------------------- | ---------------- |
    | ul.firstChild        | 返回第一个子节点，包含文字节点  |
    | ul.lastChild         | 返回最后一个子节点，包含文字节点 |
-   | ul.firstElementChild | 返回第一个元素节点，H5新增   |
-   | ul.lastElementChild  | 返回最后一个元素节点，H5新增  |
+   | ul.firstElementChild | 返回第一个元素节点，H5 新增   |
+   | ul.lastElementChild  | 返回最后一个元素节点，H5 新增  |
 
 4. 兄弟节点
   
@@ -366,7 +366,7 @@ var arr = new Array();
    ul.previousElementSibling //上一个兄弟元素节点
    ```
 
-5. nextSibLing问题解决
+5. nextSibLing 问题解决
   
    ```javascript
    function getNextElementSibling(element) {
@@ -382,7 +382,7 @@ var arr = new Array();
 
 ##### 5.节点的增删
 
-1. 创建节点（使用innerHTML创建多个元素时为了提高效率，把元素放到数组中一次性创建，此时效率比createElement高）
+1. 创建节点（使用 innerHTML 创建多个元素时为了提高效率，把元素放到数组中一次性创建，此时效率比 createElement 高）
   
    ```javascript
    var li = document.createElement('li');//创建了一个Li节点
@@ -418,7 +418,7 @@ var arr = new Array();
   
    ```javascript
    ul.cloneNode(true);//参数为true表示深拷贝，不写或false表示浅拷贝
-  ```javascript
+  ``` javascript
 
 #### 6.事件操作
 
@@ -480,14 +480,14 @@ var arr = new Array();
    | ------------------- | --------------------------- |
    | e.currentTarget     | 返回事件绑定的对象                   |
    | e.target            | 返回触发事件的对象                   |
-   | e.srcElement        | 返回触发事件的对象IE6-8使用            |
+   | e.srcElement        | 返回触发事件的对象 IE6-8 使用            |
    | e.type              | 返回事件的类型如：click              |
-   | e.cancelBubble      | 该属性阻止冒泡，IE6-8使用             |
-   | e.returnValue       | 该属性阻止默认事件，IE-6-8使用，比如不让链接跳转 |
+   | e.cancelBubble      | 该属性阻止冒泡，IE6-8 使用             |
+   | e.returnValue       | 该属性阻止默认事件，IE-6-8 使用，比如不让链接跳转 |
    | e.preventDefault()  | 该方法组织默认事件，比如不让链接跳转          |
    | e.stopPropagation() | 阻止冒泡                        |
 
-3. e.target和this的区别
+3. e.target 和 this 的区别
   
    ```javascript
    <ul>
@@ -507,12 +507,12 @@ var arr = new Array();
   
    | 鼠标事件对象    | 说明                      |
    | --------- | ----------------------- |
-   | e.clientX | 返回鼠标相对于浏览器窗口可视区的x坐标     |
-   | e.clientY | 返回鼠标相对于浏览器窗口可视区的Y坐标     |
-   | e.pageX   | 返回鼠标相对于文档页面的X坐标  IE9+支持 |
-   | e.pageY   | 返回鼠标相对于文档页面的Y坐标  IE9+支持 |
-   | e.screenX | 返回鼠标相对于电脑屏幕的X坐标         |
-   | e.screenY | 返回鼠标相对于电脑屏幕的Y坐标         |
+   | e.clientX | 返回鼠标相对于浏览器窗口可视区的 x 坐标     |
+   | e.clientY | 返回鼠标相对于浏览器窗口可视区的 Y 坐标     |
+   | e.pageX   | 返回鼠标相对于文档页面的 X 坐标  IE9+支持 |
+   | e.pageY   | 返回鼠标相对于文档页面的 Y 坐标  IE9+支持 |
+   | e.screenX | 返回鼠标相对于电脑屏幕的 X 坐标         |
+   | e.screenY | 返回鼠标相对于电脑屏幕的 Y 坐标         |
 
 ##### 7.2 键盘事件
 
@@ -520,16 +520,16 @@ var arr = new Array();
 | ---------- | ------------------------------ |
 | onkeyup    | 某个键盘按键松开时触发                    |
 | onkeydown  | 某个键盘按键按下时触发                    |
-| onkeypress | 某个按键按下时触发，不识别功能键ctrl,shift,箭头等 |
+| onkeypress | 某个按键按下时触发，不识别功能键 ctrl, shift, 箭头等 |
 
 ##### 7.3 键盘事件对象
 
 | 键盘事件对象属性         | 说明          |
 | ---------------- | ----------- |
-| ~~e.keyCode~~    | 返回改键的ASCII值 |
+| ~~e.keyCode~~    | 返回改键的 ASCII 值 |
 | e.key == 'enter' | 判断按下的按键     |
 
-##### 7.4 window对象的常见事件
+##### 7.4 window 对象的常见事件
 
 1. 页面加载事件
   
@@ -540,7 +540,7 @@ var arr = new Array();
 
 2. 调整窗口大小事件
   
-   (只要发生窗口大小变化就会触发这个时间配合<mark>window.innerWidth</mark>使用)
+   (只要发生窗口大小变化就会触发这个时间配合 <mark> window.innerWidth </mark> 使用)
    
    ```javascript
    window.onresize = function(){};
@@ -567,11 +567,11 @@ var arr = new Array();
    clearInterval(time);
    ```
 
-##### 7.6 location对象
+##### 7.6 location 对象
 
-| location对象属性    | 返回值                 |
+| location 对象属性    | 返回值                 |
 | --------------- | ------------------- |
-| location.href   | 获取或设置整个url          |
+| location.href   | 获取或设置整个 url          |
 | location.host   | 返回主机（域名）名           |
 | location.port   | 返回端口号               |
 | location.search | 返回参数                |
@@ -579,15 +579,15 @@ var arr = new Array();
 
 ###### 方法
 
-| location对象方法       | 返回值                                         |
+| location 对象方法       | 返回值                                         |
 | ------------------ | ------------------------------------------- |
-| location.assign()  | 跟href一样，可以跳转页面（网页重定向）                       |
+| location.assign()  | 跟 href 一样，可以跳转页面（网页重定向）                       |
 | location.replace() | 替换当前页面，不记录历史，不能后退页面                         |
-| location.reload()  | 重新加载页面，相当于刷新按钮或者 f5如果参数为true，强制刷新   ctrl+f5 |
+| location.reload()  | 重新加载页面，相当于刷新按钮或者 f5 如果参数为 true，强制刷新   ctrl+f5 |
 
-##### 7.7 navigator对象
+##### 7.7 navigator 对象
 
-    navigator 对象包含有关浏览器的信息，它有很多属性，我们最常用的是 <mark>userAgent</mark>，该属性可以返回由客户机发送服务器的 user-agent 头部的值。
+    navigator 对象包含有关浏览器的信息，它有很多属性，我们最常用的是 <mark> userAgent </mark>，该属性可以返回由客户机发送服务器的 user-agent 头部的值。
 
 下面前端代码可以判断用户那个终端打开页面，实现跳转
 
@@ -599,11 +599,11 @@ if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
  }
 ```
 
-##### 7.8 history对象
+##### 7.8 history 对象
 
-    window对象给我们提供了一个 history对象，与浏览器历史记录进行交互。该对象包含用户（在浏览器窗口中）访问过的URL。
+    window 对象给我们提供了一个 history 对象，与浏览器历史记录进行交互。该对象包含用户（在浏览器窗口中）访问过的 URL。
 
-| history对象方法 | 作用                          |
+| history 对象方法 | 作用                          |
 | ----------- | --------------------------- |
 | back()      | 可以后退功能                      |
 | forward()   | 前进功能                        |
@@ -613,44 +613,44 @@ if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
 
 设备像素比是指 逻辑像素和物理像素的比值
 
-#### document.body、document.documentElement和window.screen的宽高区别
+#### document.body、document.documentElement 和 window.screen 的宽高区别
 
-- document.body -- body标签的宽高
+- document.body -- body 标签的宽高
 - document.documentElement -- 网页可视区域的宽高(**不包括滚动条**)
 - window.screen -- 屏幕的宽高
 
 #### 8.元素偏移量 offset
 
-| offset属性   | 作用                                                         |
+| offset 属性   | 作用                                                         |
 | ------------ | ------------------------------------------------------------ |
-| offsetParent | 返回作为该元素带有定位的父级元素，如果父级元素都没有定位则返回body |
+| offsetParent | 返回作为该元素带有定位的父级元素，如果父级元素都没有定位则返回 body |
 | offsetTop    | 返回相对于带有定位父元素上方的偏移量                         |
 | offsetLeft   | 返回相对于带有定位父元素左边框的偏移量                       |
-| offsetWidth  | 返回自身包括padding,边框，内容区的宽度，                     |
-| offsetHeight | 返回自身包括padding,边框，内容区的高度，                     |
+| offsetWidth  | 返回自身包括 padding, 边框，内容区的宽度，                     |
+| offsetHeight | 返回自身包括 padding, 边框，内容区的高度，                     |
 
 #### 9.元素可视区 client
 
-| client属性     | 作用                        |
+| client 属性     | 作用                        |
 | ------------ | ------------------------- |
 | clientTop    | 返回元素上边框的大小                |
 | clientLeft   | 返回元素左边框的大小                |
-| clientWidth  | 返回自身包括padding,内容区的宽度，不含边框 |
-| clientHeight | 返回自身包括padding,内容区的高度，不含边框 |
+| clientWidth  | 返回自身包括 padding, 内容区的宽度，不含边框 |
+| clientHeight | 返回自身包括 padding, 内容区的高度，不含边框 |
 
 #### 10.元素滚动 scroll
 
-| scroll属性             | 作用                                                         |
+| scroll 属性             | 作用                                                         |
 | ---------------------- | ------------------------------------------------------------ |
 | scrollTop              | 返回被卷曲的上侧距离，获取或设置一个元素的内容垂直滚动的像素数。 |
 | scrollLeft             | 返回被卷曲的左侧距离                                         |
 | scrollWidth            | 返回自身实际宽度，不含边框                                   |
 | scrollHeight           | 返回自身实际高度，不含边框                                   |
-| window.pageYOffset     | 返回页面的被卷曲的上侧距离H5新增                             |
-| window.pageXOffset     | 返回页面被卷去的左侧距离H5新增                               |
-| scroll(坐标x,坐标y)    | 将元素滚动到指定位置                                         |
-| scrollTo(坐标x,坐标Y)  | 将元素滚动到指定位置跟上面一样                               |
-| scrollBy(坐标x，坐标Y) | 每隔一秒使元素从当前的位置向指定位置移动指定的像素位置       |
+| window.pageYOffset     | 返回页面的被卷曲的上侧距离 H5 新增                             |
+| window.pageXOffset     | 返回页面被卷去的左侧距离 H5 新增                               |
+| scroll(坐标 x, 坐标 y)    | 将元素滚动到指定位置                                         |
+| scrollTo(坐标 x, 坐标 Y)  | 将元素滚动到指定位置跟上面一样                               |
+| scrollBy(坐标 x，坐标 Y) | 每隔一秒使元素从当前的位置向指定位置移动指定的像素位置       |
 
 ##### 兼容写法
 
@@ -664,13 +664,13 @@ function getScroll() {
 //document.documentElement.scroolTop要在页面声名dtd才能使用
 ```
 
-页面被卷去的头部：可以通过<mark>window.pageYOffset</mark> 获得  如果是被卷去的左侧<mark>window.pageXOffset</mark>
+页面被卷去的头部：可以通过 <mark> window.pageYOffset </mark> 获得  如果是被卷去的左侧 <mark> window.pageXOffset </mark>
 
 #### 11.主要用法
 
-1.offset系列 经常用于获得元素位置    offsetLeft  offsetTop
+1.offset 系列 经常用于获得元素位置    offsetLeft  offsetTop
 
-2.client经常用于获取元素大小  clientWidth clientHeight
+2.client 经常用于获取元素大小  clientWidth clientHeight
 
 3.scroll 经常用于获取滚动距离 scrollTop  scrollLeft  
 
@@ -689,18 +689,18 @@ function getScroll() {
 | 事件对象           | 事件说明                    |
 | -------------- | ----------------------- |
 | touches        | 正在触摸屏幕的所有手指的一个列表        |
-| targetTouches  | 正在触摸当前DOM元素的手指列表        |
+| targetTouches  | 正在触摸当前 DOM 元素的手指列表        |
 | changedTouches | 手指状态发生改变的手指列表，从无到有或从有到无 |
 
-###### 1.动画过渡结束触发事件<mark>transitionend</mark>
+###### 1.动画过渡结束触发事件 <mark> transitionend </mark>
 
 #### 13.其他常见事件
 
 | 事件名                | 事件说明                                                     |
 | --------------------- | ------------------------------------------------------------ |
-| onerror               | 在dom于元素执行错误时自动触发的事件如img图片路径错误找不到图片时 |
-| onchange              | 在表单元素内容改变时触发,button选中状态改变;input输入文字改变时,失去焦点触发;file选中文件改变时触发 |
-| 在拖动目标上触发事件: | 默认只有img,被选中的文字，连接可以被拖拽，其它元素要设置**dragable**为true才能被拖拽，在拖拽该元素是要让该元素消失可以在延时定时器中将**className设置为invisible**,时间设置为0 |
+| onerror               | 在 dom 于元素执行错误时自动触发的事件如 img 图片路径错误找不到图片时 |
+| onchange              | 在表单元素内容改变时触发, button 选中状态改变; input 输入文字改变时, 失去焦点触发; file 选中文件改变时触发 |
+| 在拖动目标上触发事件: | 默认只有 img, 被选中的文字，连接可以被拖拽，其它元素要设置 **dragable** 为 true 才能被拖拽，在拖拽该元素是要让该元素消失可以在延时定时器中将 **className 设置为 invisible**, 时间设置为 0 |
 | ondragstart           | 用户开始拖放元素时触发                                       |
 | ondrag                | 用户正在拖动时触发                                           |
 | ondragend             | 用户完成元素拖动后触发                                       |
@@ -709,7 +709,7 @@ function getScroll() {
 | ondragover            | 当某被拖动的对象在另一对象容器范围内拖动时触发此事件，要设置阻止默认行为 |
 | ondragleave           | 当被鼠标拖动的对象离开其容器范围内时触发此事件               |
 | ondrop                | 在一个拖动过程中，释放鼠标键时触发此事件，要设置阻止默认行为 |
-| oninput               | 在表单元素内容改变时触发,button选中状态改变,input输入文字改变时file选中文件改变时触发 |
+| oninput               | 在表单元素内容改变时触发, button 选中状态改变, input 输入文字改变时 file 选中文件改变时触发 |
 |                       |                                                              |
 |                       |                                                              |
 

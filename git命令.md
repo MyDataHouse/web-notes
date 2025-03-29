@@ -410,6 +410,7 @@ git lfs install
 ```shell
 #交互式操作历史提交 2是指条数，这个只能修改操作一般提交，不包含合并
 git rebase -i HEAD~2  
+git push --force
 #包含合并提交，要修改合并消息把打开的提交记录里，找到对应的提交。把merge -C 换成 merge -c
 git rebase -i --rebase-merges HEAD~10
 #打开当前rebase 的待办事项，当rebase有暂停等待用户操作时，可以使用用以修改之前的操作。不用关掉rebase重新开始
