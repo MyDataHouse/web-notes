@@ -77,3 +77,29 @@
 这样起作用（因为前两个值表示无论如何该元素都不会改变，会显示出来，`该元素没有内容的情况下，父元素要有高`。）
 
 ##### align-self`属性align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+
+#### flex布局中的问题
+
+##### 父 flex 元素 被子 flex 元素 撑开
+
+```html
+<section class="flex flex-col h-80">
+    <div class="h-20">
+        头
+    </div>
+    <section class="flex flex-1 overflow-y:auto"> //它的高度会撑满父元素，而不是自动分配, 解决方法设置到这里
+        <div class="h-full h-100">
+          内容
+        </div>
+    </section>
+</section>
+```
+
+###### 解决方法：
+
+1. 设置 overflow: hidden;
+2. 设置 min-height: 0;
+3. 设置 contain: size;
+4. 设置 contain: strict;
+
+###### 原因：flex 纵向主轴上，子项默认的 min-height是auto,导致内容会撑开自己，需要设置可以限制尺寸相关的属性才可以解决
