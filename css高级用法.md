@@ -43,3 +43,15 @@ content-visibility是CSS新增的属性，主要用来提高页面渲染性能�
 }
 ```
 
+### 根据字体大小自适应设置文字间距
+
+```css
+* {
+   letter-spacing: clamp(
+     -0.05em,
+     calc((1em - 1rem) / -10),
+     0em
+   );
+ }
+```
+
