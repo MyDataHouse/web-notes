@@ -184,6 +184,8 @@ git branch -d  分支的名字  #需要是合并过的才能删除
 ```shell
 #把本地分支推送到远程分支,并进行关联
 git push --set-upstream origin master:master
+#修改本地分支对应的远程分支,先切换到本地分支
+git branch --set-upstream-to=origin/test
 # -u 表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带 -u 参数
 git push -u 远程仓库的别名 本地分支名称:远程分支名称
 
