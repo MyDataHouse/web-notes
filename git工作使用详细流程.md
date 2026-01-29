@@ -221,3 +221,9 @@ git commit -m 'fix(修复统计): 修复统计错乱情况'
 git commit -m 'refactor(任务管理模块重构): 任务管理模块重构'
 ```
 
+### 规范正则
+
+```text
+^(feat|fix|docs|style|refactor|perf|build|revert|wip|workflow|types|release|test|chore|merge|ci)(\(.{0,20}\))?: .{1,108}
+```
+

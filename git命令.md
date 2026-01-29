@@ -417,4 +417,49 @@ git push --force
 git rebase -i --rebase-merges HEAD~10
 #打开当前rebase 的待办事项，当rebase有暂停等待用户操作时，可以使用用以修改之前的操作。不用关掉rebase重新开始
 git rebase --edit-todo
+#修改最近一次提交
+git commit --amend
 ```
+
+## 36. .gitignore 常用规则
+
+```text
+# .gitignore
+# Node
+node_modules/
+dist/
+build/
+.env
+.env.*
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+coverage/
+*.local
+*.cache
+*.tmp
+
+# Git
+.git/
+```
+
